@@ -1,0 +1,2526 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SIAKAD STIKMI — Sekolah Tinggi Internasional Konservatori Musik Indonesia</title>
+<style>
+:root{
+  --maroon:#800000;
+  --maroon-dark:#5c0000;
+  --maroon-darker:#3d0000;
+  --maroon-light:#a00000;
+  --maroon-soft:#faf2f2;
+  --maroon-tint:#f3e3e3;
+  --gold:#c9a227;
+  --ink:#2b1d1d;
+  --muted:#7d6a6a;
+  --line:#e6d6d6;
+  --ok:#1b7a3d;
+  --ok-bg:#e8f5ec;
+  --warn:#9a6b00;
+  --warn-bg:#fdf4dd;
+  --bad:#a01010;
+  --bad-bg:#fbe6e6;
+  --white:#ffffff;
+  --shadow:0 6px 24px rgba(92,0,0,.12);
+  --shadow-sm:0 2px 8px rgba(92,0,0,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;font-family:"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:#f4ecec;line-height:1.55;font-size:16px}
+a{color:var(--maroon);text-decoration:none}
+a:hover{text-decoration:underline}
+h1,h2,h3,h4{margin:0 0 .4em;line-height:1.25;color:var(--maroon-dark)}
+h1{font-size:clamp(1.4rem,3vw,1.9rem)}
+h2{font-size:clamp(1.2rem,2.4vw,1.5rem)}
+h3{font-size:clamp(1.05rem,2vw,1.25rem)}
+small{color:var(--muted)}
+.wrap{max-width:1100px;margin:0 auto;padding:0 16px}
+.clamp{max-width:760px;margin:0 auto;padding:0 16px}
+
+.topbar{background:linear-gradient(135deg,var(--maroon-dark),var(--maroon));color:#fff;box-shadow:var(--shadow);position:sticky;top:0;z-index:30}
+.topbar .wrap{display:flex;align-items:center;gap:12px;padding-top:10px;padding-bottom:10px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;flex:1;min-width:240px}
+.logo{width:46px;height:46px;border-radius:50%;background:#fff;color:var(--maroon-dark);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:1.1rem;flex-shrink:0;box-shadow:inset 0 0 0 2px var(--gold)}
+.brand .title{font-weight:700;font-size:clamp(1rem,2.2vw,1.25rem);line-height:1.15}
+.brand .sub{font-size:.78rem;opacity:.85;font-weight:400}
+.topnav{display:flex;gap:6px;flex-wrap:wrap}
+.topnav a,.topnav button{color:#fff;background:transparent;border:1px solid rgba(255,255,255,.25);padding:8px 12px;border-radius:8px;font-size:.85rem;cursor:pointer;font-family:inherit}
+.topnav a:hover,.topnav button:hover{background:rgba(255,255,255,.15);text-decoration:none}
+.topnav .user{background:rgba(255,255,255,.12);border-color:transparent;cursor:default}
+
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;box-shadow:var(--shadow-sm);margin:14px 0}
+.card.flush{padding:0;overflow:hidden}
+.card header{background:var(--maroon-soft);border-bottom:2px solid var(--maroon);padding:12px 20px}
+.card header h2{margin:0}
+.card header p{margin:4px 0 0;color:var(--muted);font-size:.85rem}
+.card .body{padding:18px 20px}
+
+.btn{display:inline-block;background:var(--maroon);color:#fff;border:none;padding:10px 18px;border-radius:8px;font-size:.92rem;font-family:inherit;cursor:pointer;font-weight:600;transition:.15s;text-align:center}
+.btn:hover{background:var(--maroon-dark);text-decoration:none}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn.ghost{background:transparent;color:var(--maroon);border:1px solid var(--maroon)}
+.btn.ghost:hover{background:var(--maroon-soft)}
+.btn.gold{background:var(--gold);color:#3d2c00}
+.btn.gold:hover{background:#b8941f}
+.btn.sm{padding:6px 12px;font-size:.82rem;border-radius:6px}
+.btn.ok{background:var(--ok)}
+.btn.ok:hover{background:#146230}
+.btn.bad{background:var(--bad)}
+.btn.bad:hover{background:#800c0c}
+.btn.block{display:block;width:100%}
+.btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 18px}
+.form-grid .full{grid-column:1/-1}
+@media(max-width:640px){.form-grid{grid-template-columns:1fr}}
+label{display:block;font-size:.85rem;font-weight:600;margin-bottom:4px;color:var(--maroon-dark)}
+label .req{color:var(--bad)}
+input,select,textarea{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:8px;font-size:.92rem;font-family:inherit;background:#fff;color:var(--ink)}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--maroon);box-shadow:0 0 0 3px var(--maroon-tint)}
+textarea{resize:vertical;min-height:70px}
+.fieldset-title{grid-column:1/-1;background:var(--maroon-tint);border-left:4px solid var(--maroon);padding:8px 12px;border-radius:6px;font-weight:700;color:var(--maroon-dark);margin-top:6px;font-size:.95rem}
+.help{font-size:.78rem;color:var(--muted);margin-top:4px}
+.check-line{display:flex;gap:10px;align-items:flex-start;font-size:.9rem;font-weight:400;color:var(--ink)}
+.check-line input[type=checkbox]{width:auto;margin-top:3px;flex-shrink:0}
+.chip-group{display:flex;gap:8px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:#fff;padding:8px 14px;border-radius:20px;cursor:pointer;font-size:.88rem;user-select:none;transition:.12s}
+.chip:hover{border-color:var(--maroon)}
+.chip.on{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+
+.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:520px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
+th{background:var(--maroon);color:#fff;font-weight:600}
+tbody tr:nth-child(even){background:var(--maroon-soft)}
+tbody tr:hover{background:var(--maroon-tint)}
+.badge{display:inline-block;padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:700}
+.badge.pending{background:var(--warn-bg);color:var(--warn)}
+.badge.accepted{background:var(--ok-bg);color:var(--ok)}
+.badge.rejected{background:var(--bad-bg);color:var(--bad)}
+.badge.lunas{background:var(--ok-bg);color:var(--ok)}
+.badge.verified{background:var(--ok-bg);color:var(--ok)}
+.badge.belum{background:var(--bad-bg);color:var(--bad)}
+.badge.claimed{background:var(--warn-bg);color:var(--warn)}
+
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:14px 0}
+.stat{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow-sm);border-top:4px solid var(--maroon)}
+.stat .num{font-size:1.6rem;font-weight:800;color:var(--maroon-dark)}
+.stat .lbl{font-size:.8rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+
+.tabs{display:flex;gap:4px;border-bottom:2px solid var(--maroon);margin:14px 0;flex-wrap:wrap}
+.tab{padding:10px 16px;cursor:pointer;border:1px solid transparent;border-bottom:none;border-radius:8px 8px 0 0;background:transparent;color:var(--muted);font-weight:600;font-size:.9rem}
+.tab.active{background:var(--maroon);color:#fff;border-color:var(--maroon)}
+.tab:hover:not(.active){background:var(--maroon-soft);color:var(--maroon-dark)}
+.tabpane{display:none}
+.tabpane.active{display:block}
+
+.alert{padding:10px 14px;border-radius:8px;margin:10px 0;font-size:.88rem}
+.alert.ok{background:var(--ok-bg);color:var(--ok);border:1px solid #bfe3c9}
+.alert.warn{background:var(--warn-bg);color:var(--warn);border:1px solid #f0d98c}
+.alert.bad{background:var(--bad-bg);color:var(--bad);border:1px solid #f0c0c0}
+.alert.info{background:var(--maroon-soft);color:var(--maroon-dark);border:1px solid var(--maroon-tint)}
+
+.hero{background:linear-gradient(135deg,var(--maroon-darker),var(--maroon) 60%,var(--maroon-light));color:#fff;padding:40px 0;text-align:center;box-shadow:var(--shadow)}
+.hero h1{color:#fff;margin-bottom:8px}
+.hero p{max-width:640px;margin:0 auto;opacity:.92;font-size:1rem}
+.role-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin:18px 0}
+.role-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px 18px;text-align:center;box-shadow:var(--shadow-sm);cursor:pointer;transition:.15s;border-top:5px solid var(--maroon)}
+.role-card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-top-color:var(--gold)}
+.role-card .ico{font-size:2rem;margin-bottom:8px}
+.role-card h3{margin-bottom:4px}
+.role-card p{font-size:.85rem;color:var(--muted);margin:0}
+
+.kv{display:grid;grid-template-columns:190px 1fr;gap:6px 14px;font-size:.9rem}
+@media(max-width:640px){.kv{grid-template-columns:1fr}}
+.kv dt{color:var(--muted);font-weight:600}
+.kv dd{margin:0}
+
+.modal{position:fixed;inset:0;background:rgba(45,0,0,.55);display:flex;align-items:center;justify-content:center;z-index:50;padding:16px}
+.modal .box{background:#fff;border-radius:14px;max-width:560px;width:100%;max-height:90vh;overflow:auto;box-shadow:var(--shadow)}
+.modal header{background:var(--maroon);color:#fff;padding:14px 18px;border-radius:14px 14px 0 0;display:flex;justify-content:space-between;align-items:center}
+.modal header h3{color:#fff;margin:0}
+.modal header .x{cursor:pointer;font-size:1.4rem;background:none;border:none;color:#fff}
+.modal .body{padding:18px}
+.modal footer{padding:12px 18px;border-top:1px solid var(--line);display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+
+.muted{color:var(--muted)}
+.center{text-align:center}
+.right{text-align:right}
+.mt{margin-top:12px}.mt2{margin-top:24px}
+.mb{margin-bottom:12px}
+.hide{display:none!important}
+hr{border:none;border-top:1px solid var(--line);margin:14px 0}
+.doc-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:#fff;flex-wrap:wrap}
+.doc-item .meta{font-size:.85rem}
+.doc-item .meta b{color:var(--maroon-dark)}
+.file-pill{display:inline-block;background:var(--maroon-soft);color:var(--maroon-darker);padding:2px 8px;border-radius:6px;font-size:.78rem}
+.empty{padding:30px;text-align:center;color:var(--muted)}
+.footnote{font-size:.8rem;color:var(--muted);text-align:center;padding:20px 16px}
+.banner-demo{background:var(--warn-bg);color:var(--warn);border:1px solid #f0d98c;border-radius:8px;padding:8px 12px;font-size:.82rem;margin:12px 0;text-align:center}
+.form-note{background:var(--maroon-soft);border-left:4px solid var(--maroon);padding:10px 14px;border-radius:6px;font-size:.85rem;margin-bottom:14px}
+.pay-box{border:1px dashed var(--maroon);border-radius:10px;padding:14px;background:var(--maroon-soft)}
+.pay-box .amount{font-size:1.3rem;font-weight:800;color:var(--maroon-dark)}
+.money{font-weight:700;color:var(--maroon-dark);white-space:nowrap}
+.krs-course{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border:1px solid var(--line);border-radius:8px;margin-bottom:8px;background:#fff}
+.krs-course input{width:auto;margin-top:4px;flex-shrink:0}
+.krs-course .cinfo{flex:1;font-size:.88rem}
+.krs-course .cinfo b{color:var(--maroon-dark)}
+.sks-total{font-size:1.05rem;font-weight:800;color:var(--maroon-dark)}
+.ann-item{border-left:4px solid var(--maroon);padding:10px 14px;background:var(--maroon-soft);border-radius:6px;margin-bottom:10px}
+.ann-item .date{font-size:.75rem;color:var(--muted)}
+.ann-item.unread{border-left-color:var(--gold);background:var(--warn-bg)}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <div class="logo">SM</div>
+      <div>
+        <div class="title">SIAKAD STIKMI</div>
+        <div class="sub">Sekolah Tinggi Internasional Konservatori Musik Indonesia</div>
+      </div>
+    </div>
+    <div class="topnav" id="topnav"></div>
+  </div>
+</div>
+
+<div id="view"></div>
+
+<div class="footnote">
+  © <span id="year"></span> STIKMI — Sistem Akademik &amp; Penerimaan Mahasiswa Baru.
+  Prototipe mandiri (data tersimpan di browser). Standar field mengikuti struktur data PD-DIKTI / NEOFEEDER LLDIKTI
+  dan Formulir Aplikasi Mahasiswa Baru resmi STIKMI.
+</div>
+
+<div id="modal-root"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* =========================================================
+   SIAKAD STIKMI v2 (Supabase) — Single-file app, backend Supabase
+   - Login: Supabase Auth (email + password)
+   - Data: PostgreSQL via RPC SECURITY DEFINER (sync_all + mutasi)
+   - Dokumen: Storage bucket "stikmi-docs"
+   - Penyimpanan terpusat: admin & mahasiswa share data sama
+   ========================================================= */
+
+/* ---------- KONFIGURASI SUPABASE (isi sesuai PANDUAN_SETUP_SUPABASE.md) ---------- */
+const SUPABASE_URL = 'https://kfkukrspvbaekfngkviq.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_MmHhud34WX8hN9N_-vWMtw_iAWgNtkv';
+let sb = null; // Supabase client
+function initSupabase(){
+  try{
+    if(window.supabase && SUPABASE_URL && SUPABASE_KEY &&
+       SUPABASE_URL!=='PASTE_URL_DISINI'){
+      sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      // Tangkap event recovery dari klik tautan reset password di email.
+      // Supabase sudah mem-parse token & membuat session recovery; kita arahkan
+      // user ke form "Password Baru" supaya tidak terjebak di halaman login.
+      sb.auth.onAuthStateChange((event/*, session*/) => {
+        if(event === 'PASSWORD_RECOVERY' && location.hash !== '#/reset-password'){
+          location.hash = '#/reset-password';
+        }
+      });
+    }
+  }catch(e){ console.error('Supabase init gagal:', e); }
+}
+
+const APP_VERSION = '2.0';
+
+/* ---------- Katalog Mata Kuliah (per prodi, per semester) ---------- */
+const KATALOG_MK = {
+  'P01': [
+    {kode:'MK-101',nama:'Ear Training I',sks:2,smt:1,wajib:true},
+    {kode:'MK-102',nama:'Teori Musik Dasar',sks:2,smt:1,wajib:true},
+    {kode:'MK-103',nama:'Instrumen Mayor I',sks:3,smt:1,wajib:true},
+    {kode:'MK-104',nama:'Sejarah Musik Barat',sks:2,smt:1,wajib:true},
+    {kode:'MK-105',nama:'Pendidikan Agama',sks:2,smt:1,wajib:true},
+    {kode:'MK-106',nama:'Bahasa Indonesia',sks:2,smt:1,wajib:true},
+    {kode:'MK-107',nama:'Choir / Ensemble I',sks:1,smt:1,wajib:true},
+    {kode:'MK-201',nama:'Ear Training II',sks:2,smt:2,wajib:true},
+    {kode:'MK-202',nama:'Harmoni I',sks:3,smt:2,wajib:true},
+    {kode:'MK-203',nama:'Instrumen Mayor II',sks:3,smt:2,wajib:true},
+    {kode:'MK-204',nama:'Analisis Bentuk',sks:2,smt:2,wajib:true},
+    {kode:'MK-205',nama:'Musik Dunia',sks:2,smt:2,wajib:false},
+    {kode:'MK-206',nama:'Pendidikan Pancasila',sks:2,smt:2,wajib:true},
+    {kode:'MK-207',nama:'Piano Wajib I',sks:1,smt:2,wajib:false}
+  ],
+  'P03': [
+    {kode:'MK-301',nama:'Dasar-Dasar Pendidikan Musik',sks:3,smt:1,wajib:true},
+    {kode:'MK-302',nama:'Teori Musik Dasar',sks:2,smt:1,wajib:true},
+    {kode:'MK-303',nama:'Instrumen Mayor I',sks:3,smt:1,wajib:true},
+    {kode:'MK-304',nama:'Psikologi Pendidikan',sks:2,smt:1,wajib:true},
+    {kode:'MK-305',nama:'Pendidikan Agama',sks:2,smt:1,wajib:true},
+    {kode:'MK-306',nama:'Metode Dalcroze/Kodaly/Orff',sks:2,smt:2,wajib:true},
+    {kode:'MK-307',nama:'Arransemen Musik Pendidikan',sks:2,smt:2,wajib:false}
+  ]
+};
+function katalogFor(idProdi){
+  return KATALOG_MK[idProdi] || KATALOG_MK['P01'];
+}
+
+/* ---------- Settings ---------- */
+const DEFAULT_SETTINGS = {
+  biaya_registrasi: 350000,
+  bank_nama: 'Bank Negeri Indonesia (BNI)',
+  bank_rekening: '1234567890',
+  bank_atas_nama: 'Yayasan STIKMI',
+  bank_cabang: 'Jakarta Selatan'
+};
+
+/* ---------- DB: cache in-memory yang sinkron dengan server Supabase ---------- */
+const DB = {
+  _cache:{ registrations:[], accounts:[], documents:[], invoices:[], krs:[], announcements:[], readmarks:[], settings:Object.assign({},DEFAULT_SETTINGS) },
+  async sync(){
+    if(!sb) return null;
+    const { data, error } = await sb.rpc('sync_all');
+    if(error){ console.error('sync_all error:', error); toast('Gagal memuat data: '+esc(error.message),'bad'); return null; }
+    const d = data || {};
+    // Petakan ke bentuk lama agar fungsi render/admin lama tetap kompatibel
+    DB._cache.registrations = (d.registrations||[]).map(r=>
+      Object.assign({}, r.data||{}, { id:r.id, submitted_by:r.submitted_by,
+        pembayaran:r.pembayaran||{}, status:r.status, nim:r.nim,
+        created_at:r.created_at, data:r.data||{} }));
+    DB._cache.accounts = (d.accounts||[]).map(p=>({
+      id:p.id, username:p.email, email:p.email, role:p.role, nama:p.nama,
+      nim:p.nim, prodi:p.prodi, regId:p.reg_id, created:p.created_at }));
+    DB._cache.documents = (d.documents||[]).map(x=>({
+      id:x.id, owner:x.owner, owner_email:x.owner_email, nama:x.nama, nim:x.nim,
+      type:x.type, semester:x.semester, keterangan:x.keterangan,
+      fileName:x.file_name, size:x.size, mime:x.mime, file_path:x.file_path,
+      uploaded:x.uploaded_at }));
+    DB._cache.invoices = d.invoices || [];
+    DB._cache.krs = d.krs || [];
+    DB._cache.announcements = d.announcements || [];
+    DB._cache.readmarks = (d.readmarks||[]).map(r=>({ userId:r.user_id, annId:r.announcement_id, read_at:r.read_at }));
+    if(d.settings) DB._cache.settings = Object.assign({}, DEFAULT_SETTINGS, d.settings);
+    DB._role = d.role || 'anon';
+    DB._profile = d.profile || null;
+    return d;
+  },
+  getReg(){ return DB._cache.registrations; },
+  getAcc(){ return DB._cache.accounts; },
+  getDoc(){ return DB._cache.documents; },
+  getInv(){ return DB._cache.invoices; },
+  getKRS(){ return DB._cache.krs; },
+  getAnn(){ return DB._cache.announcements; },
+  getRead(){ return DB._cache.readmarks; },
+  getSet(){ return DB._cache.settings; },
+  // Stub save* (dipertahankan agar kode lama tidak error); mutasi nyata lewat RPC.
+  saveReg(){}, saveAcc(){}, saveDoc(){}, saveInv(){}, saveKRS(){}, saveAnn(){}, saveRead(){}, saveSet(){}
+};
+
+/* ---------- Session: dibungkus Supabase Auth + cache profil ---------- */
+const Session = {
+  _u:null,
+  get(){ return Session._u || JSON.parse(sessionStorage.getItem('stikmi_session')||'null'); },
+  set(u){ Session._u=u; sessionStorage.setItem('stikmi_session', JSON.stringify(u)); },
+  clear(){ Session._u=null; sessionStorage.removeItem('stikmi_session'); }
+};
+
+/* ---------- Helpers ---------- */
+const $ = (sel,el=document)=>el.querySelector(sel);
+const $$ = (sel,el=document)=>Array.from(el.querySelectorAll(sel));
+const el = (tag,attrs={},html='')=>{ const e=document.createElement(tag); for(const k in attrs){ if(k==='class')e.className=attrs[k]; else if(k==='dataset')Object.assign(e.dataset,attrs[k]); else e.setAttribute(k,attrs[k]); } if(html)e.innerHTML=html; return e; };
+const uid = ()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+
+function genNIM(){
+  // Preview sisi klien. NIM final di-generate server (approve_registration) bila dikosongkan.
+  const year = new Date().getFullYear();
+  const n = Math.floor(Math.random()*900)+1;
+  return `${year}${String(n).padStart(3,'0')}`;
+}
+function rupiah(n){
+  if(n===null||n===undefined||n==='') return '-';
+  const num = Number(n);
+  if(isNaN(num)) return String(n);
+  return 'Rp ' + num.toLocaleString('id-ID');
+}
+function fmtDate(s){
+  if(!s) return '-';
+  try{ const d=new Date(s); return d.toLocaleDateString('id-ID',{day:'2-digit',month:'long',year:'numeric'}); }catch(e){return s}
+}
+function fmtDateTime(ts){
+  if(!ts) return '-';
+  try{ const d=new Date(ts); return d.toLocaleString('id-ID',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'}); }catch(e){return ts}
+}
+function esc(s){
+  if(s===null||s===undefined) return '';
+  return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+function readFileAsDataURL(file){
+  return new Promise((resolve,reject)=>{
+    const r=new FileReader();
+    r.onload=()=>resolve(r.result);
+    r.onerror=reject;
+    r.readAsDataURL(file);
+  });
+}
+/* Unduh file dari Storage Supabase (bucket private → signed URL) */
+async function downloadStorageFile(path, name){
+  if(!sb || !path){ toast('File tidak tersedia','warn'); return; }
+  try{
+    const { data, error } = await sb.storage.from('stikmi-docs').createSignedUrl(path, 60);
+    if(error || !data){ toast('Gagal membuat tautan: '+(error?.message||''),'bad'); return; }
+    const a = el('a',{href:data.signedUrl, download:name||''});
+    document.body.appendChild(a); a.click(); a.remove();
+  }catch(e){ toast('Gagal: '+e.message,'bad'); }
+}
+/* Buka file Storage di tab baru (untuk pratinjau PDF/gambar) */
+async function viewStorageFile(path){
+  if(!sb || !path){ toast('File tidak tersedia','warn'); return; }
+  try{
+    const { data, error } = await sb.storage.from('stikmi-docs').createSignedUrl(path, 60);
+    if(error || !data){ toast('Gagal: '+(error?.message||''),'bad'); return; }
+    window.open(data.signedUrl, '_blank');
+  }catch(e){ toast('Gagal: '+e.message,'bad'); }
+}
+function toast(msg,type='info'){
+  const t=el('div',{class:'alert '+type});
+  t.textContent=msg;
+  t.style.position='fixed';
+  t.style.top='70px';
+  t.style.left='50%';
+  t.style.transform='translateX(-50%)';
+  t.style.zIndex='90';
+  t.style.maxWidth='90vw';
+  t.style.boxShadow='var(--shadow)';
+  document.body.appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transition='.3s'; setTimeout(()=>t.remove(),300); },2600);
+}
+
+function openModal(title, bodyHTML, footerHTML=''){
+  const root=$('#modal-root');
+  root.innerHTML = `
+    <div class="modal" onclick="if(event.target===this)closeModal()">
+      <div class="box">
+        <header><h3>${title}</h3><button class="x" onclick="closeModal()">&times;</button></header>
+        <div class="body">${bodyHTML}</div>
+        ${footerHTML?`<footer>${footerHTML}</footer>`:''}
+      </div>
+    </div>`;
+}
+function closeModal(){ $('#modal-root').innerHTML=''; }
+
+function route(){
+  const hash = location.hash.replace(/^#/,'') || '/';
+  $('#year').textContent = new Date().getFullYear();
+  renderNav();
+  const v = $('#view');
+  if(!_booted){ v.innerHTML = '<div class="wrap" style="padding:48px 16px;text-align:center;color:var(--muted)">Memuat data dari server…</div>'; return; }
+  const sess = Session.get();
+
+  if(hash==='/' || hash===''){
+    v.innerHTML = viewLanding();
+  } else if(hash==='/daftar'){
+    v.innerHTML = viewDaftar();
+    bindDaftar();
+  } else if(hash==='/login'){
+    v.innerHTML = viewLogin();
+    bindLogin();
+  } else if(hash==='/lupa-password'){
+    v.innerHTML = viewLupaPassword();
+    bindLupaPassword();
+  } else if(hash==='/reset-password'){
+    v.innerHTML = viewResetPassword();
+    bindResetPassword();
+  } else if(hash==='/admin'){
+    if(!sess || sess.role!=='admin'){ v.innerHTML = viewLogin('admin'); bindLogin('admin'); return; }
+    v.innerHTML = viewAdmin();
+    bindAdmin();
+  } else if(hash==='/mahasiswa'){
+    if(!sess || sess.role!=='mahasiswa'){ v.innerHTML = viewLogin('mahasiswa'); bindLogin('mahasiswa'); return; }
+    v.innerHTML = viewMahasiswa();
+    bindMahasiswa();
+  } else {
+    v.innerHTML = viewLanding();
+  }
+  window.scrollTo(0,0);
+}
+
+function renderNav(){
+  const nav = $('#topnav');
+  const sess = Session.get();
+  nav.innerHTML = '';
+  const add = (label,href)=>nav.appendChild(el('a',{href:href},label));
+  add('Beranda','#/');
+  add('Pendaftaran','#/daftar');
+  if(sess){
+    if(sess.role==='admin'){ add('Panel Admin','#/admin'); }
+    if(sess.role==='mahasiswa'){ add('Portal Mahasiswa','#/mahasiswa'); }
+    const u = el('button',{class:'user'},'👤 '+sess.nama+' ('+sess.role+')');
+    u.style.cursor='default';
+    nav.appendChild(u);
+    const out = el('button',{},'Keluar');
+    out.onclick=async ()=>{
+      if(sb){ try{ await sb.auth.signOut(); }catch(e){} }
+      Session.clear(); DB._cache={registrations:[],accounts:[],documents:[],invoices:[],krs:[],announcements:[],readmarks:[],settings:Object.assign({},DEFAULT_SETTINGS)};
+      location.hash='#/'; route();
+    };
+    nav.appendChild(out);
+  } else {
+    add('Masuk','#/login');
+  }
+}
+
+/* ---------- Boot: init Supabase, restore session, sync data ---------- */
+let _booted = false;
+async function boot(){
+  initSupabase();
+  if(sb){
+    try{
+      const { data } = await sb.auth.getSession();
+      if(data && data.session){
+        await DB.sync();
+        const p = DB._profile;
+        if(p && p.role && p.role!=='pending'){
+          Session.set({uid:p.id, username:p.email, role:p.role, nama:p.nama||p.email, nim:p.nim||null, regId:p.reg_id||null, email:p.email});
+        } else { Session.clear(); }
+      } else { await DB.sync(); }
+    }catch(e){ console.error('boot error', e); }
+  } else {
+    // CONFIG belum diisi → tampilkan pesan setup
+    $('#view').innerHTML = `<div class="wrap" style="padding:48px 16px"><div class="alert warn">
+      <b>Aplikasi belum dikonfigurasi.</b> Buka file ini di teks editor, isi
+      <code>SUPABASE_URL</code> &amp; <code>SUPABASE_KEY</code> sesuai
+      <b>PANDUAN_SETUP_SUPABASE.md</b>, lalu muat ulang halaman.</div></div>`;
+    renderNav();
+    return;
+  }
+  _booted = true;
+  route();
+}
+window.addEventListener('hashchange', route);
+window.addEventListener('DOMContentLoaded', boot);
+
+/* =========================================================
+   LANDING
+   ========================================================= */
+function viewLanding(){
+  const st = DB.getSet();
+  return `
+  <section class="hero">
+    <div class="clamp">
+      <h1>Selamat Datang di SIAKAD STIKMI</h1>
+      <p>Sistem Akademik &amp; Penerimaan Mahasiswa Baru — Sekolah Tinggi Internasional Konservatori Musik Indonesia.
+      Daftar sebagai calon mahasiswa, kelola data oleh admin, unggah dokumen akademik, bayar tagihan, dan isi KRS online.</p>
+    </div>
+  </section>
+  <div class="wrap">
+    <div class="banner-demo">🎓 Pendaftaran Mahasiswa Baru STIKMI <b>telah dibuka</b>. Daftar online → lengkapi berkas &amp; bukti pembayaran → verifikasi admin → isi KRS. Mahasiswa lama silakan login untuk melihat tagihan, KRS, dan pengumuman kampus.</div>
+
+    <div class="role-cards">
+      <div class="role-card" onclick="location.hash='#/daftar'">
+        <div class="ico">📝</div>
+        <h3>Pendaftaran Mahasiswa</h3>
+        <p>Sesuai Formulir Aplikasi Mahasiswa Baru resmi STIKMI + standar LLDIKTI/NEOFEEDER, dengan konfirmasi pembayaran registrasi.</p>
+      </div>
+      <div class="role-card" onclick="location.hash='#/admin'">
+        <div class="ico">🛠️</div>
+        <h3>Panel Admin</h3>
+        <p>Verifikasi pendaftar &amp; pembayaran, kelola akun, tagihan UKT, KRS, pengumuman, ekspor NEOFEEDER.</p>
+      </div>
+      <div class="role-card" onclick="location.hash='#/mahasiswa'">
+        <div class="ico">🎓</div>
+        <h3>Portal Mahasiswa</h3>
+        <p>Dashboard, KRS online, tagihan &amp; pembayaran, upload dokumen, pengumuman kampus.</p>
+      </div>
+    </div>
+
+    <div class="card">
+      <header><h2>Biaya Registrasi &amp; Pembayaran</h2><p>Konfirmasi pembayaran dilakukan langsung saat mengisi formulir pendaftaran.</p></header>
+      <div class="body">
+        <div class="pay-box">
+          <div class="amount">${rupiah(st.biaya_registrasi)}</div>
+          <p class="muted" style="margin:4px 0">Biaya registrasi / formulir pendaftaran mahasiswa baru.</p>
+          <hr>
+          <div class="kv">
+            <dt>Bank</dt><dd>${esc(st.bank_nama)}</dd>
+            <dt>No. Rekening</dt><dd><b>${esc(st.bank_rekening)}</b></dd>
+            <dt>Atas Nama</dt><dd>${esc(st.bank_atas_nama)}</dd>
+            <dt>Cabang</dt><dd>${esc(st.bank_cabang)}</dd>
+          </div>
+          <p class="help">Setelah transfer, centang "Saya sudah melakukan pembayaran" di formulir dan unggah bukti transfernya. Admin akan memverifikasi.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <header><h2>Alur Pendaftaran</h2><p>Empat langkah dari pendaftaran sampai aktif sebagai mahasiswa.</p></header>
+      <div class="body">
+        <div class="form-grid">
+          <div><h4>1. Isi Formulir &amp; Bayar</h4><p class="muted">Lengkapi formulir (sesuai form resmi STIKMI), transfer biaya registrasi, unggah bukti bayar.</p></div>
+          <div><h4>2. Verifikasi Admin</h4><p class="muted">Admin memverifikasi pembayaran dan kelengkapan data pendaftar.</p></div>
+          <div><h4>3. Audisi &amp; Kelulusan</h4><p class="muted">Peserta mengikuti audisi sesuai jadwal; hasil diumumkan oleh admin (terima/tolak).</p></div>
+          <div><h4>4. Akun Mahasiswa Aktif</h4><p class="muted">Jika diterima, admin membuatkan akun + NIM. Login ke Portal Mahasiswa untuk KRS, tagihan, dan dokumen.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <header><h2>Standar Data Mengikuti LLDIKTI / NEOFEEDER</h2><p>Field formulir disusun menyerupai struktur tabel PD-DIKTI Feeder + formulir resmi STIKMI.</p></header>
+      <div class="body">
+        <div class="form-grid">
+          <div><h4>1. Data Pribadi</h4><p class="muted">Nama, NIK, tempat/tanggal lahir, jenis kelamin, agama, kewarganegaraan, status sipil.</p></div>
+          <div><h4>2. Alamat &amp; Kontak</h4><p class="muted">Provinsi, kab/kota, jalan, RT/RW, kode pos, telepon, HP, email.</p></div>
+          <div><h4>3. Akademik &amp; Musik</h4><p class="muted">Program studi, peminatan konsentrasi, instrumen mayor, riwayat pendidikan musik, bahan audisi.</p></div>
+          <div><h4>4. Data Orang Tua/Wali</h4><p class="muted">Nama, pekerjaan, alamat, kontak, penghasilan.</p></div>
+          <div class="full"><h4>5. Berkas &amp; Pembayaran</h4><p class="muted">Pas foto, ijazah/SKL, KTP/KK, dan bukti transfer registrasi diunggah saat pendaftaran.</p></div>
+          <div class="full"><h4>6. Pasca-Diterima</h4><p class="muted">KRS online, tagihan UKT &amp; pembayaran, upload dokumen (KTM, transkrip, dll), pengumuman kampus.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* =========================================================
+   FORMULIR PENDAFTARAN (calon mahasiswa)
+   ========================================================= */
+function viewDaftar(){
+  const st = DB.getSet();
+  return `
+  <div class="clamp">
+    <div class="card flush">
+      <header><h2>Formulir Aplikasi Mahasiswa Baru</h2><p>Tahun Akademik ${new Date().getFullYear()}/${new Date().getFullYear()+1} — sesuai formulir resmi STIKMI + standar LLDIKTI/NEOFEEDER.</p></header>
+      <div class="body">
+        <div class="form-note">Bidang bertanda <b style="color:var(--bad)">*</b> wajib diisi. Berkas JPG/PNG/PDF, maks. 2 MB per berkas. No. Audisi akan diisi oleh petugas.</div>
+        <form id="formDaftar" onsubmit="return false">
+          <div class="form-grid">
+
+            <div class="fieldset-title">A. PROGRAM STUDI &amp; PEMINATAN</div>
+
+            <div>
+              <label>Program Studi <span class="req">*</span></label>
+              <select name="id_prodi" required>
+                <option value="">- pilih -</option>
+                <option value="P01">S-1 Seni Musik</option>
+                <option value="P02">S-1 Komposisi Musik</option>
+                <option value="P03">S-1 Pendidikan Musik</option>
+                <option value="P04">S-1 Musikologi / Etnomusikologi</option>
+                <option value="P05">D-3 Musik Pop &amp; Jazz</option>
+                <option value="P06">D-3 Produksi &amp; Teknologi Musik</option>
+              </select>
+            </div>
+            <div>
+              <label>Peminatan Program <span class="req">*</span></label>
+              <select name="peminatan_program" required>
+                <option value="">- pilih -</option>
+                <option value="Regular Degree">Regular Degree</option>
+                <option value="Double Degree">Double Degree</option>
+              </select>
+            </div>
+            <div class="full">
+              <label>Peminatan Konsentrasi <span class="req">*</span> <span class="hint">(pilih maks. 2)</span></label>
+              <div class="chip-group" id="konsentrasiGroup">
+                <div class="chip" data-v="Classical Performance">Classical Performance</div>
+                <div class="chip" data-v="Pop/Jazz Performance">Pop/Jazz Performance</div>
+                <div class="chip" data-v="Education">Education</div>
+                <div class="chip" data-v="Composition">Composition</div>
+                <div class="chip" data-v="Conducting">Conducting</div>
+                <div class="chip" data-v="Music Technology">Music Technology</div>
+              </div>
+              <div class="help">Formulir resmi mencantumkan maksimal 2 peminatan konsentrasi.</div>
+            </div>
+            <div>
+              <label>Instrumen Mayor <span class="req">*</span></label>
+              <select name="instrumen_mayor" required>
+                <option value="">- pilih -</option>
+                <option>Piano</option><option>Biola</option><option>Cello</option>
+                <option>Contrabass</option><option>Flute</option><option>Clarinet</option>
+                <option>Saxophone</option><option>Trumpet</option><option>Trombone</option>
+                <option>Gitar Klasik</option><option>Gitar Elektrik</option><option>Bass Elektrik</option>
+                <option>Drum / Perkusi</option><option>Vokal</option>
+                <option>Orgel / Keyboard</option><option>Komposisi</option>
+                <option>Konduksi (Conducting)</option><option>Musik Tradisional</option>
+                <option>Lainnya</option>
+              </select>
+            </div>
+            <div>
+              <label>Instrumen Mayor — Lainnya</label>
+              <input name="instrumen_mayor_lain" placeholder="isi bila memilih 'Lainnya'">
+            </div>
+
+            <div class="fieldset-title">B. DATA DIRI MAHASISWA</div>
+
+            <div class="full">
+              <label>Nama Lengkap <span class="req">*</span></label>
+              <input name="nama_lengkap" required placeholder="sesuai dokumen/KTP">
+            </div>
+            <div>
+              <label>NIK (16 digit) <span class="req">*</span></label>
+              <input name="nik" required pattern="[0-9]{16}" maxlength="16" placeholder="Nomor Induk Kependudukan">
+            </div>
+            <div>
+              <label>Jenis Kelamin <span class="req">*</span></label>
+              <select name="jenis_kelamin" required>
+                <option value="">- pilih -</option>
+                <option value="L">Laki-laki</option>
+                <option value="P">Perempuan</option>
+              </select>
+            </div>
+            <div>
+              <label>Tempat Lahir <span class="req">*</span></label>
+              <input name="tempat_lahir" required>
+            </div>
+            <div>
+              <label>Tanggal Lahir <span class="req">*</span></label>
+              <input type="date" name="tanggal_lahir" required>
+            </div>
+            <div>
+              <label>Agama <span class="req">*</span></label>
+              <select name="agama" required>
+                <option value="">- pilih -</option>
+                <option>Islam</option><option>Kristen</option><option>Katolik</option>
+                <option>Hindu</option><option>Buddha</option><option>Konghucu</option>
+              </select>
+            </div>
+            <div>
+              <label>Kewarganegaraan <span class="req">*</span></label>
+              <input name="kewarganegaraan" required value="Indonesia">
+            </div>
+            <div>
+              <label>Status Sipil</label>
+              <select name="status_sipil">
+                <option value="Belum Kawin">Belum Kawin</option>
+                <option value="Kawin">Kawin</option>
+              </select>
+            </div>
+
+            <div class="full">
+              <label>Alamat Rumah <span class="req">*</span></label>
+              <input name="jalan" required placeholder="Nama jalan, no. rumah">
+            </div>
+            <div>
+              <label>RT / RW</label>
+              <input name="rt_rw" placeholder="mis. 001/002">
+            </div>
+            <div>
+              <label>Kelurahan / Kecamatan</label>
+              <input name="kel_kec">
+            </div>
+            <div>
+              <label>Kabupaten / Kota <span class="req">*</span></label>
+              <input name="kab_kota" required>
+            </div>
+            <div>
+              <label>Provinsi <span class="req">*</span></label>
+              <select name="provinsi" required>
+                <option value="">- pilih -</option>
+                <option>DKI Jakarta</option><option>Jawa Barat</option><option>Jawa Tengah</option>
+                <option>Jawa Timur</option><option>DI Yogyakarta</option><option>Banten</option>
+                <option>Bali</option><option>Sumatera Utara</option><option>Sumatera Barat</option>
+                <option>Sumatera Selatan</option><option>Riau</option><option>Kepulauan Riau</option>
+                <option>Jambi</option><option>Bengkulu</option><option>Lampung</option>
+                <option>Aceh</option><option>Kalimantan Barat</option><option>Kalimantan Tengah</option>
+                <option>Kalimantan Selatan</option><option>Kalimantan Timur</option><option>Kalimantan Utara</option>
+                <option>Sulawesi Utara</option><option>Sulawesi Selatan</option><option>Sulawesi Tengah</option>
+                <option>Sulawesi Tenggara</option><option>Sulawesi Barat</option><option>Gorontalo</option>
+                <option>Maluku</option><option>Maluku Utara</option><option>Papua</option><option>Papua Barat</option>
+                <option>Nusa Tenggara Barat</option><option>Nusa Tenggara Timur</option><option>Bangka Belitung</option>
+              </select>
+            </div>
+            <div>
+              <label>Kode Pos</label>
+              <input name="kode_pos" pattern="[0-9]{5}" maxlength="5">
+            </div>
+            <div>
+              <label>Telepon Rumah</label>
+              <input name="telepon">
+            </div>
+            <div>
+              <label>No. HP <span class="req">*</span></label>
+              <input name="hp" required placeholder="08xxxxxxxxxx">
+            </div>
+            <div class="full">
+              <label>Email <span class="req">*</span></label>
+              <input type="email" name="email" required>
+            </div>
+
+            <div class="fieldset-title">C. DATA ORANG TUA / WALI</div>
+
+            <div class="full"><label>Nama Orang Tua/Wali <span class="req">*</span></label><input name="nama_ortu" required></div>
+            <div><label>Pekerjaan Orang Tua/Wali</label><input name="kerja_ortu"></div>
+            <div>
+              <label>Penghasilan Orang Tua/Bulan</label>
+              <select name="penghasilan_ortu">
+                <option value="lt10">&lt; Rp 10.000.000/bulan</option>
+                <option value="gt10">&gt; Rp 10.000.000/bulan</option>
+              </select>
+            </div>
+            <div class="full"><label>Alamat Orang Tua/Wali <span class="hint">(kosongkan bila sama dengan alamat mahasiswa)</span></label><input name="alamat_ortu"></div>
+            <div><label>Telepon Rumah Ortu</label><input name="telepon_ortu"></div>
+            <div><label>No. HP Orang Tua</label><input name="hp_ortu"></div>
+            <div class="full"><label>Email Orang Tua/Wali</label><input type="email" name="email_ortu"></div>
+
+            <div class="fieldset-title">D. RIWAYAT PENDIDIKAN FORMAL</div>
+
+            <div>
+              <label>Nama SMA</label>
+              <input name="nama_sma">
+            </div>
+            <div>
+              <label>Jurusan SMA</label>
+              <input name="jurusan_sma">
+            </div>
+            <div>
+              <label>Tahun Lulus SMA</label>
+              <input name="tahun_lulus_sma" pattern="[0-9]{4}" maxlength="4" placeholder="mis. 2025">
+            </div>
+            <div>
+              <label>NISN</label>
+              <input name="nisn" pattern="[0-9]{10}" maxlength="10">
+            </div>
+            <div>
+              <label>Alamat SMA</label>
+              <input name="alamat_sma">
+            </div>
+            <div>
+              <label>Perguruan Tinggi Sebelumnya <span class="hint">(jika ada/alih jenjang)</span></label>
+              <input name="pt_sebelumnya">
+            </div>
+            <div>
+              <label>Jurusan/Prodi Sebelumnya</label>
+              <input name="jurusan_pt">
+            </div>
+            <div>
+              <label>Tahun Masuk &amp; Lulus PT</label>
+              <input name="tahun_pt" placeholder="mis. 2023 - 2025">
+            </div>
+
+            <div class="fieldset-title">E. RIWAYAT PENDIDIKAN &amp; PENGALAMAN MUSIK</div>
+
+            <div>
+              <label>Lama Belajar Musik</label>
+              <input name="lama_belajar" placeholder="mis. 5 tahun">
+            </div>
+            <div>
+              <label>Tingkat / Grade</label>
+              <input name="tingkat_grade" placeholder="mis. ABRSM Grade 6">
+            </div>
+            <div>
+              <label>Nama Sekolah Musik</label>
+              <input name="sekolah_musik">
+            </div>
+            <div>
+              <label>Nama Guru Musik</label>
+              <input name="guru_musik">
+            </div>
+            <div class="full"><label>Repertoar yang Pernah Dimainkan</label><textarea name="repertoar" placeholder="a. ...&#10;b. ...&#10;c. ..."></textarea></div>
+            <div class="full"><label>Kompetisi/Festival Musik yang Pernah Diikuti</label><textarea name="kompetisi" placeholder="a. ...&#10;b. ...&#10;c. ..."></textarea></div>
+            <div class="full"><label>Prestasi yang Pernah Diraih di Bidang Musik</label><textarea name="prestasi" placeholder="a. ...&#10;b. ...&#10;c. ..."></textarea></div>
+            <div>
+              <label>Instrumen Lain yang Dikuasai</label>
+              <input name="instrumen_lain">
+            </div>
+            <div>
+              <label>Lama Belajar Instrumen Lain</label>
+              <input name="lama_belajar_lain">
+            </div>
+
+            <div class="fieldset-title">F. REPERTOAR / BAHAN AUDISI</div>
+
+            <div class="full"><label>Bahan Audisi <span class="req">*</span> <span class="hint">(3 karya, satu per baris)</span></label><textarea name="bahan_audisi" required placeholder="a. Karya 1 (komposer)&#10;b. Karya 2 (komposer)&#10;c. Karya 3 (komposer)"></textarea></div>
+
+            <div class="fieldset-title">G. MOTIVASI MENJADI MAHASISWA STIKMI</div>
+
+            <div class="full"><label>Motivasi <span class="req">*</span></label><textarea name="motivasi" required style="min-height:120px" placeholder="Tuliskan motivasi Anda menempuh pendidikan di STIKMI..."></textarea></div>
+
+            <div class="fieldset-title">H. DATA PENDUKUNG LLDIKTI/NEOFEEDER</div>
+
+            <div>
+              <label>Jalur Masuk <span class="req">*</span></label>
+              <select name="jalur_masuk" required>
+                <option value="">- pilih -</option>
+                <option value="01">SNMPTN</option>
+                <option value="02">SBMPTN / UTBK</option>
+                <option value="03">Mandiri - Ujian Tes</option>
+                <option value="04">Mandiri - Prestasi (Audisi)</option>
+                <option value="05">Alih Jenjang</option>
+                <option value="99">Lainnya</option>
+              </select>
+            </div>
+            <div>
+              <label>Tanggal Masuk Kuliah <span class="req">*</span></label>
+              <input type="date" name="tgl_masuk_kuliah" required>
+            </div>
+            <div>
+              <label>Semester Mulai</label>
+              <select name="semester_mulai">
+                <option value="1">1 (Ganjil)</option>
+                <option value="2">2 (Genap)</option>
+              </select>
+            </div>
+            <div>
+              <label>Kelas / Waktu Kuliah</label>
+              <select name="kelas">
+                <option value="Pagi">Pagi</option>
+                <option value="Siang">Siang</option>
+                <option value="Sore">Sore</option>
+                <option value="Malam">Malam</option>
+              </select>
+            </div>
+
+            <div class="fieldset-title">I. BERKAS PENDUKUNG</div>
+            <div><label>Pas Foto (JPG/PNG) <span class="req">*</span></label><input type="file" name="berkas_foto" accept="image/png,image/jpeg" required></div>
+            <div><label>Ijazah / SKL (PDF/JPG)</label><input type="file" name="berkas_ijazah" accept="application/pdf,image/png,image/jpeg"></div>
+            <div><label>KTP / Kartu Keluarga (PDF/JPG)</label><input type="file" name="berkas_ktp" accept="application/pdf,image/png,image/jpeg"></div>
+
+            <div class="fieldset-title">J. PEMBAYARAN REGISTRASI</div>
+            <div class="full">
+              <div class="pay-box">
+                <div class="amount">${rupiah(st.biaya_registrasi)}</div>
+                <p class="muted" style="margin:4px 0">Biaya registrasi/formulir pendaftaran mahasiswa baru.</p>
+                <div class="kv">
+                  <dt>Bank</dt><dd>${esc(st.bank_nama)}</dd>
+                  <dt>No. Rekening</dt><dd><b>${esc(st.bank_rekening)}</b></dd>
+                  <dt>Atas Nama</dt><dd>${esc(st.bank_atas_nama)}</dd>
+                  <dt>Cabang</dt><dd>${esc(st.bank_cabang)}</dd>
+                </div>
+              </div>
+            </div>
+            <div class="full">
+              <label class="check-line">
+                <input type="checkbox" name="sudah_bayar" id="chkBayar">
+                <span>Saya <b>sudah melakukan pembayaran</b> registrasi sebesar <b>${rupiah(st.biaya_registrasi)}</b> dan akan/telah mengunggah bukti transfer.</span>
+              </label>
+            </div>
+            <div class="full" id="bayarFields" style="display:none">
+              <label>Tanggal Transfer</label>
+              <input type="date" name="tgl_bayar">
+              <div class="help" style="margin-bottom:10px">Nama &amp; bank pengirim akan diambil otomatis dari data Anda.</div>
+              <label>Bukti Transfer (JPG/PNG/PDF) <span class="req" id="buktiReq"></span></label>
+              <input type="file" name="berkas_bukti" accept="application/pdf,image/png,image/jpeg">
+              <div class="help">Simpan bukti transfer Anda; admin akan memverifikasi pembayaran ini.</div>
+            </div>
+
+            <div class="fieldset-title">K. AKUN PENGGUNA</div>
+            <div><label>Username yang diinginkan <span class="req">*</span></label><input name="username" required pattern="[a-zA-Z0-9._]{4,30}"></div>
+            <div><label>&nbsp;</label><div class="help">Jika diterima, admin akan mengaktifkan akun ini untuk Portal Mahasiswa.</div></div>
+            <div><label>Password <span class="req">*</span></label><input type="password" name="password" required minlength="6"></div>
+            <div><label>Konfirmasi Password <span class="req">*</span></label><input type="password" name="password2" required minlength="6"></div>
+
+            <div class="full">
+              <label class="check-line">
+                <input type="checkbox" name="setuju" required>
+                <span>Saya menyatakan bahwa data yang saya isi adalah <b>benar</b> dan dapat dipertanggungjawabkan. Saya menyetujui data ini digunakan untuk keperluan penerimaan &amp; pelaporan LLDIKTI/NEOFEEDER.</span>
+              </label>
+            </div>
+
+            <div class="full btn-row">
+              <button class="btn" id="btnSubmitDaftar">Kirim Pendaftaran</button>
+              <a class="btn ghost" href="#/">Batal</a>
+            </div>
+          </div>
+        </form>
+        <div id="daftarMsg"></div>
+      </div>
+    </div>
+  </div>`;
+}
+
+async function bindDaftar(){
+  const form = $('#formDaftar');
+
+  // chips konsentrasi (max 2)
+  $$('#konsentrasiGroup .chip').forEach(c=>{
+    c.onclick=()=>{
+      if(!c.classList.contains('on') && $$('#konsentrasiGroup .chip.on').length>=2){
+        toast('Maksimal 2 peminatan konsentrasi','warn'); return;
+      }
+      c.classList.toggle('on');
+    };
+  });
+
+  // toggle payment fields
+  const chk = $('#chkBayar');
+  chk.onchange=()=>{
+    $('#bayarFields').style.display = chk.checked ? 'block':'none';
+    $('#buktiReq').textContent = chk.checked?'*':'';
+    form.elements['berkas_bukti'].required = chk.checked;
+  };
+
+  $('#btnSubmitDaftar').onclick = async (e)=>{
+    e.preventDefault();
+    const msg = $('#daftarMsg'); msg.innerHTML='';
+    if(!form.checkValidity()){ form.reportValidity(); return; }
+    const fd = new FormData(form);
+    if(fd.get('password') !== fd.get('password2')){
+      msg.innerHTML='<div class="alert bad">Password dan konfirmasi tidak sama.</div>'; return;
+    }
+    const konsentrasi = $$('#konsentrasiGroup .chip.on').map(c=>c.dataset.v);
+    if(konsentrasi.length<1){
+      msg.innerHTML='<div class="alert bad">Pilih minimal 1 peminatan konsentrasi.</div>'; return;
+    }
+    if(konsentrasi.length>2){
+      msg.innerHTML='<div class="alert bad">Maksimal 2 peminatan konsentrasi.</div>'; return;
+    }
+    const btn = $('#btnSubmitDaftar'); btn.disabled=true; btn.textContent='Memproses...';
+    const email = String(fd.get('email')).trim();
+    const password = fd.get('password');
+    const uname = String(fd.get('username')||'').toLowerCase();
+
+    // 1) Daftarkan akun via Supabase Auth (email + password)
+    let suUser = null;
+    try{
+      const { data:su, error:suErr } = await sb.auth.signUp({ email, password,
+        options:{ data:{ nama: fd.get('nama_lengkap') } } });
+      if(suErr){ throw new Error(suErr.message); }
+      suUser = su.user;
+      if(!suUser){ throw new Error('Pendaftaran akun gagal (mungkin email sudah terpakai).'); }
+    }catch(err){
+      msg.innerHTML='<div class="alert bad">'+esc(err.message||err)+'</div>';
+      btn.disabled=false; btn.textContent='Kirim Pendaftaran'; return;
+    }
+    const newUid = suUser.id;
+
+    // 2) Unggah berkas ke Storage bucket "stikmi-docs"
+    const uploadBerkas = async (key, field)=>{
+      const f = fd.get(key);
+      if(!f || !f.size) return null;
+      if(f.size > 5*1024*1024){ throw new Error('Berkas '+key.replace('berkas_','')+' melebihi 5MB'); }
+      const path = `registrations/${newUid}/${field}/${Date.now()}-${f.name}`;
+      const { error:upErr } = await sb.storage.from('stikmi-docs')
+        .upload(path, f, { contentType:f.type||'application/octet-stream', upsert:false });
+      if(upErr){ throw new Error('Gagal unggah '+field+': '+upErr.message); }
+      return { name:f.name, size:f.size, type:f.type, path };
+    };
+    // sudahBayar WAJIB dideklarasikan sebelum dipakai di blok unggah berkas di bawah.
+    // (Bug lama: 'const sudahBayar' ditulis SETELAH 'if(sudahBayar)' → TDZ ReferenceError
+    //  → submit_registration tidak pernah dipanggil → pendaftar tidak muncul di admin.)
+    const sudahBayar = fd.get('sudah_bayar')==='on';
+    let berkas, bukti;
+    try{
+      berkas = {
+        foto: await uploadBerkas('berkas_foto','foto'),
+        ijazah: await uploadBerkas('berkas_ijazah','ijazah'),
+        ktp: await uploadBerkas('berkas_ktp','ktp')
+      };
+      if(sudahBayar) bukti = await uploadBerkas('berkas_bukti','bukti');
+    }catch(err){
+      msg.innerHTML='<div class="alert bad">'+esc(err.message)+'</div>';
+      btn.disabled=false; btn.textContent='Kirim Pendaftaran'; return;
+    }
+
+    const st = DB.getSet();
+    const data = {
+      id_prodi: fd.get('id_prodi'),
+      nama_prodi: prodiName(fd.get('id_prodi')),
+      peminatan_program: fd.get('peminatan_program'),
+      konsentrasi,
+      instrumen_mayor: fd.get('instrumen_mayor'),
+      instrumen_mayor_lain: fd.get('instrumen_mayor_lain')||'',
+      nama_lengkap: fd.get('nama_lengkap'),
+      nik: fd.get('nik'),
+      jenis_kelamin: fd.get('jenis_kelamin'),
+      tempat_lahir: fd.get('tempat_lahir'),
+      tanggal_lahir: fd.get('tanggal_lahir'),
+      agama: fd.get('agama'),
+      kewarganegaraan: fd.get('kewarganegaraan'),
+      status_sipil: fd.get('status_sipil'),
+      jalan: fd.get('jalan'),
+      rt_rw: fd.get('rt_rw'),
+      kel_kec: fd.get('kel_kec'),
+      kab_kota: fd.get('kab_kota'),
+      provinsi: fd.get('provinsi'),
+      kode_pos: fd.get('kode_pos'),
+      telepon: fd.get('telepon'),
+      hp: fd.get('hp'),
+      email: email,
+      nama_ortu: fd.get('nama_ortu'),
+      kerja_ortu: fd.get('kerja_ortu'),
+      penghasilan_ortu: fd.get('penghasilan_ortu'),
+      alamat_ortu: fd.get('alamat_ortu'),
+      telepon_ortu: fd.get('telepon_ortu'),
+      hp_ortu: fd.get('hp_ortu'),
+      email_ortu: fd.get('email_ortu'),
+      nama_sma: fd.get('nama_sma'),
+      jurusan_sma: fd.get('jurusan_sma'),
+      tahun_lulus_sma: fd.get('tahun_lulus_sma'),
+      nisn: fd.get('nisn'),
+      alamat_sma: fd.get('alamat_sma'),
+      pt_sebelumnya: fd.get('pt_sebelumnya'),
+      jurusan_pt: fd.get('jurusan_pt'),
+      tahun_pt: fd.get('tahun_pt'),
+      lama_belajar: fd.get('lama_belajar'),
+      tingkat_grade: fd.get('tingkat_grade'),
+      sekolah_musik: fd.get('sekolah_musik'),
+      guru_musik: fd.get('guru_musik'),
+      repertoar: fd.get('repertoar'),
+      kompetisi: fd.get('kompetisi'),
+      prestasi: fd.get('prestasi'),
+      instrumen_lain: fd.get('instrumen_lain'),
+      lama_belajar_lain: fd.get('lama_belajar_lain'),
+      bahan_audisi: fd.get('bahan_audisi'),
+      motivasi: fd.get('motivasi'),
+      jalur_masuk: fd.get('jalur_masuk'),
+      jalur_masuk_label: jalurLabel(fd.get('jalur_masuk')),
+      tgl_masuk_kuliah: fd.get('tgl_masuk_kuliah'),
+      semester_mulai: fd.get('semester_mulai')||'1',
+      kelas: fd.get('kelas')||'Pagi',
+      username: uname,
+      berkas,
+      pembayaran: {
+        sudah_bayar: sudahBayar,
+        jumlah: st.biaya_registrasi,
+        tgl_bayar: fd.get('tgl_bayar')||'',
+        bukti: bukti,
+        verified: false,
+        verified_at: null
+      }
+    };
+    // 3) Simpan data formulir via RPC
+    const { error:rErr } = await sb.rpc('submit_registration', { p_data: data });
+    if(rErr){
+      msg.innerHTML='<div class="alert bad">Gagal menyimpan pendaftaran: '+esc(rErr.message)+'</div>';
+      btn.disabled=false; btn.textContent='Kirim Pendaftaran'; return;
+    }
+    await DB.sync();
+    // logout agar sesi 'pending' tidak tersangkut; mahasiswa login setelah disetujui admin
+    try{ await sb.auth.signOut(); }catch(e){}
+    Session.clear();
+    btn.disabled=false; btn.textContent='Kirim Pendaftaran';
+    const bayarNote = sudahBayar
+      ? ' Pembayaran Anda akan diverifikasi admin.'
+      : ' Anda belum mengonfirmasi pembayaran — admin dapat menandainya belum bayar.';
+    msg.innerHTML='<div class="alert ok">Pendaftaran berhasil dikirim. Status: <b>PENDING</b>.'+bayarNote+' Akun: <b>'+esc(email)+'</b>. Admin akan meninjau &amp; menyetujui, lalu Anda bisa login.</div>';
+    toast('Pendaftaran terkirim!','ok');
+    form.reset();
+    $$('#konsentrasiGroup .chip.on').forEach(c=>c.classList.remove('on'));
+    $('#bayarFields').style.display='none';
+    setTimeout(()=>{ location.hash='#/login'; }, 3200);
+  };
+}
+
+function prodiName(code){
+  const m={'P01':'S-1 Seni Musik','P02':'S-1 Komposisi Musik','P03':'S-1 Pendidikan Musik','P04':'S-1 Musikologi / Etnomusikologi','P05':'D-3 Musik Pop & Jazz','P06':'D-3 Produksi & Teknologi Musik'};
+  return m[code]||code;
+}
+function jalurLabel(c){ const m={'01':'SNMPTN','02':'SBMPTN/UTBK','03':'Mandiri - Tes','04':'Mandiri - Prestasi/Audisi','05':'Alih Jenjang','99':'Lainnya'}; return m[c]||c; }
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+function viewLogin(role){
+  const r = role || '';
+  return `
+  <div class="clamp">
+    <div class="card flush">
+      <header><h2>Masuk ke SIAKAD STIKMI</h2><p>${r? 'Login sebagai '+r : 'Login pakai email &amp; password akun Anda'}</p></header>
+      <div class="body">
+        <div class="banner-demo">Akun mahasiswa aktif otomatis setelah pendaftaran disetujui admin. Login memakai email + password yang Anda daftarkan.</div>
+        <form id="formLogin" onsubmit="return false">
+          <div class="form-grid" style="grid-template-columns:1fr">
+            <div>
+              <label>Email <span class="req">*</span></label>
+              <input type="email" name="email" required>
+            </div>
+            <div>
+              <label>Password <span class="req">*</span></label>
+              <input type="password" name="password" required>
+            </div>
+            <div class="btn-row">
+              <button class="btn" id="btnLogin">Masuk</button>
+              <a class="btn ghost" href="#/">Batal</a>
+            </div>
+            <div style="margin-top:10px;text-align:right">
+              <a href="#/lupa-password" style="font-size:.85rem;color:var(--maroon)">Lupa password?</a>
+            </div>
+          </div>
+          <div id="loginMsg"></div>
+        </form>
+      </div>
+    </div>
+  </div>`;
+}
+async function bindLogin(role){
+  const btn=$('#btnLogin'); if(!btn) return;
+  btn.onclick = async (e)=>{
+    e.preventDefault();
+    const f=$('#formLogin'); const fd=new FormData(f);
+    const email = String(fd.get('email')).trim();
+    const password = fd.get('password');
+    if(!email || !password){ $('#loginMsg').innerHTML='<div class="alert bad">Email &amp; password wajib diisi.</div>'; return; }
+    btn.disabled=true; btn.textContent='Memeriksa…';
+    try{
+      const { data, error } = await sb.auth.signInWithPassword({ email, password });
+      if(error){ $('#loginMsg').innerHTML='<div class="alert bad">'+esc(error.message)+'</div>'; btn.disabled=false; btn.textContent='Masuk'; return; }
+      await DB.sync();
+      const p = DB._profile;
+      if(!p || p.role==='pending'){ $('#loginMsg').innerHTML='<div class="alert warn">Akun Anda belum disetujui admin. Hubungi kampus.</div>'; await sb.auth.signOut(); btn.disabled=false; btn.textContent='Masuk'; return; }
+      Session.set({uid:p.id, username:p.email, role:p.role, nama:p.nama||p.email, nim:p.nim||null, regId:p.reg_id||null, email:p.email});
+      toast('Selamat datang, '+(p.nama||p.email),'ok');
+      const target = p.role==='admin' ? '#/admin' : '#/mahasiswa';
+      if(location.hash === target){ route(); } else { location.hash = target; }
+    }catch(err){ $('#loginMsg').innerHTML='<div class="alert bad">'+esc(err.message||err)+'</div>'; }
+    btn.disabled=false; btn.textContent='Masuk';
+  };
+}
+
+/* ---------- Lupa / Reset Password (self-service via Supabase Auth) ---------- */
+// Shared helper: kirim tautan reset password ke email.
+// redirectTo harus terdaftar di Supabase Dashboard → Authentication → URL Configuration → Redirect URLs.
+function sendPasswordReset(email){
+  const redirectTo = location.href.split('#')[0] + '#/reset-password';
+  return sb.auth.resetPasswordForEmail(email, { redirectTo });
+}
+
+function viewLupaPassword(){
+  return `
+  <div class="clamp">
+    <div class="card flush">
+      <header><h2>Lupa Password</h2><p>Masukkan email akun Anda. Kami kirim tautan reset password ke email tersebut.</p></header>
+      <div class="body">
+        <div class="banner-demo">Tautan reset hanya berlaku untuk akun yang sudah terdaftar. Cek folder Spam jika email tidak masuk dalam beberapa menit.</div>
+        <form id="formLupa" onsubmit="return false">
+          <div class="form-grid" style="grid-template-columns:1fr">
+            <div>
+              <label>Email Akun <span class="req">*</span></label>
+              <input type="email" name="email" required>
+            </div>
+            <div class="btn-row">
+              <button class="btn" id="btnLupa" type="submit">Kirim Tautan Reset</button>
+              <a class="btn ghost" href="#/login">Kembali ke Login</a>
+            </div>
+          </div>
+          <div id="lupaMsg"></div>
+        </form>
+      </div>
+    </div>
+  </div>`;
+}
+async function bindLupaPassword(){
+  const btn = $('#btnLupa'); if(!btn) return;
+  btn.onclick = async (e)=>{
+    e.preventDefault();
+    const f = $('#formLupa'); const fd = new FormData(f);
+    const email = String(fd.get('email')||'').trim();
+    const msg = $('#lupaMsg'); msg.innerHTML='';
+    if(!email){ msg.innerHTML='<div class="alert bad">Email wajib diisi.</div>'; return; }
+    btn.disabled = true; btn.textContent = 'Mengirim…';
+    try{
+      const { error } = await sendPasswordReset(email);
+      if(error){
+        // Catatan: Supabase sering mengembalikan pesan generik untuk email yang tidak terdaftar
+        // demi mencegah enumerasi akun. Tetap arahkan user cek email.
+        msg.innerHTML = '<div class="alert warn">Permintaan diterima, namun terdapat kendali: '+esc(error.message)+'. Bila email Anda terdaftar, tautan reset tetap akan terkirim. Cek folder Spam.</div>';
+      }else{
+        msg.innerHTML = '<div class="alert ok">Tautan reset password telah dikirim ke <b>'+esc(email)+'</b>. Buka email tersebut, klik tautannya, lalu masukkan password baru.</div>';
+      }
+    }catch(err){
+      msg.innerHTML = '<div class="alert bad">'+esc(err.message||err)+'</div>';
+    }
+    btn.disabled = false; btn.textContent = 'Kirim Tautan Reset';
+  };
+}
+
+function viewResetPassword(){
+  return `
+  <div class="clamp">
+    <div class="card flush">
+      <header><h2>Password Baru</h2><p>Masukkan password baru untuk akun Anda. Pastikan minimal 6 karakter dan mudah diingat oleh Anda saja.</p></header>
+      <div class="body">
+        <div class="banner-demo">Halaman ini muncul otomatis setelah Anda mengklik tautan reset dari email. Bila Anda membuka halaman ini tanpa melalui email, proses akan gagal — kembali ke <a href="#/lupa-password">Lupa Password</a>.</div>
+        <form id="formReset" onsubmit="return false">
+          <div class="form-grid" style="grid-template-columns:1fr">
+            <div>
+              <label>Password Baru <span class="req">*</span></label>
+              <input type="password" name="password" required minlength="6">
+            </div>
+            <div>
+              <label>Konfirmasi Password <span class="req">*</span></label>
+              <input type="password" name="password2" required minlength="6">
+            </div>
+            <div class="btn-row">
+              <button class="btn" id="btnReset" type="submit">Simpan Password Baru</button>
+              <a class="btn ghost" href="#/login">Batal</a>
+            </div>
+          </div>
+          <div id="resetMsg"></div>
+        </form>
+      </div>
+    </div>
+  </div>`;
+}
+async function bindResetPassword(){
+  const btn = $('#btnReset'); if(!btn) return;
+  btn.onclick = async (e)=>{
+    e.preventDefault();
+    const f = $('#formReset'); const fd = new FormData(f);
+    const np = String(fd.get('password')||'');
+    const np2 = String(fd.get('password2')||'');
+    const msg = $('#resetMsg'); msg.innerHTML='';
+    if(np.length < 6){ msg.innerHTML='<div class="alert bad">Password baru minimal 6 karakter.</div>'; return; }
+    if(np !== np2){ msg.innerHTML='<div class="alert bad">Password dan konfirmasi tidak sama.</div>'; return; }
+    btn.disabled = true; btn.textContent = 'Menyimpan…';
+    try{
+      const { error } = await sb.auth.updateUser({ password: np });
+      if(error){ msg.innerHTML='<div class="alert bad">Gagal: '+esc(error.message)+'</div>'; btn.disabled=false; btn.textContent='Simpan Password Baru'; return; }
+      msg.innerHTML='<div class="alert ok">Password berhasil diperbarui. Anda akan diarahkan ke halaman login…</div>';
+      // logout session recovery, lalu arahkan ke login
+      try{ await sb.auth.signOut(); }catch(e){}
+      Session.clear();
+      setTimeout(()=>{ location.hash = '#/login'; }, 1600);
+    }catch(err){
+      msg.innerHTML = '<div class="alert bad">'+esc(err.message||err)+'</div>';
+      btn.disabled = false; btn.textContent = 'Simpan Password Baru';
+    }
+  };
+}
+
+/* =========================================================
+   UTILITIES: download, badges, labels
+   ========================================================= */
+function statusLabel(s){ return {pending:'PENDING',accepted:'DITERIMA',rejected:'DITOLAK'}[s]||s; }
+function payRegBadge(p){
+  if(!p) return '<span class="badge belum">BELUM BAYAR</span>';
+  if(p.verified) return '<span class="badge lunas">LUNAS ✓</span>';
+  if(p.sudah_bayar) return '<span class="badge claimed">DIKLAIM (cek bukti)</span>';
+  return '<span class="badge belum">BELUM BAYAR</span>';
+}
+function invoiceStatusLabel(s){
+  return {unpaid:'<span class="badge belum">BELUM LUNAS</span>',
+          claimed:'<span class="badge claimed">DIKLAIM (cek bukti)</span>',
+          lunas:'<span class="badge lunas">LUNAS ✓</span>'}[s]||s;
+}
+function krsStatusLabel(s){
+  return {pending:'<span class="badge pending">MENUNGGU</span>',
+          approved:'<span class="badge accepted">DISETUJUI</span>',
+          rejected:'<span class="badge rejected">DITOLAK</span>'}[s]||s;
+}
+function docTypeLabel(t){
+  const m={KRS:'Kartu Rencana Studi (KRS)',SKS:'Laporan SKS',KTM:'Kartu Tanda Mahasiswa (KTM)',
+    TRANSKRIP:'Transkrip Nilai',IJAZAH:'Ijazah',SK:'Surat Keterangan',SEMINAR:'Sertifikat Seminar/PKL',
+    LAINNYA:'Dokumen Lainnya'};
+  return m[t]||t;
+}
+const DOC_TYPES = ['KRS','SKS','KTM','TRANSKRIP','IJAZAH','SK','SEMINAR','LAINNYA'];
+const INV_TYPES = ['UKT Semester','Biaya Audisi','Biaya Praktikum','Biaya Wisuda','Denda/Lainnya'];
+const MAX_SKS = 24;
+
+function triggerDownload(blob,name){
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a'); a.href=url; a.download=name;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(url),1000);
+}
+function downloadDataURL(dataURL, fileName){
+  const comma=dataURL.indexOf(',');
+  const meta=dataURL.slice(0,comma);
+  const dataPart=dataURL.slice(comma+1);
+  const isBase64=/;base64/i.test(meta);
+  const mime=(meta.match(/data:([^;]+)/)||['','application/octet-stream'])[1];
+  if(isBase64){
+    const bin=atob(dataPart);
+    const arr=new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+    triggerDownload(new Blob([arr],{type:mime}), fileName);
+  } else {
+    triggerDownload(new Blob([decodeURIComponent(dataPart)],{type:mime}), fileName);
+  }
+}
+
+/* =========================================================
+   PANEL ADMIN
+   ========================================================= */
+function viewAdmin(){
+  const regs = DB.getReg();
+  const acc = DB.getAcc();
+  const docs = DB.getDoc();
+  const invs = DB.getInv();
+  const krs = DB.getKRS();
+  const anns = DB.getAnn();
+  const mhs = acc.filter(a=>a.role==='mahasiswa');
+  const pending = regs.filter(r=>r.status==='pending').length;
+  const accepted = regs.filter(r=>r.status==='accepted').length;
+  const rejected = regs.filter(r=>r.status==='rejected').length;
+  const payUnverified = regs.filter(r=>r.pembayaran && r.pembayaran.sudah_bayar && !r.pembayaran.verified).length;
+  const invUnpaid = invs.filter(i=>i.status!=='lunas').length;
+  const krsPending = krs.filter(k=>k.status==='pending').length;
+
+  return `
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="num">${regs.length}</div><div class="lbl">Total Pendaftar</div></div>
+      <div class="stat"><div class="num">${pending}</div><div class="lbl">Pending</div></div>
+      <div class="stat"><div class="num">${accepted}</div><div class="lbl">Diterima</div></div>
+      <div class="stat"><div class="num">${rejected}</div><div class="lbl">Ditolak</div></div>
+      <div class="stat"><div class="num">${mhs.length}</div><div class="lbl">Akun Mahasiswa</div></div>
+      <div class="stat"><div class="num">${payUnverified}</div><div class="lbl">Bayar Reg. Cek</div></div>
+      <div class="stat"><div class="num">${invUnpaid}</div><div class="lbl">Tagihan Aktif</div></div>
+      <div class="stat"><div class="num">${krsPending}</div><div class="lbl">KRS Menunggu</div></div>
+    </div>
+
+    <div class="card flush">
+      <header><h2>Panel Admin — Pengelolaan Sekolah Tinggi</h2><p>Verifikasi pendaftar &amp; pembayaran, tagihan, KRS, dokumen, pengumuman, pengaturan, ekspor NEOFEEDER.</p></header>
+      <div class="body">
+        <div class="tabs">
+          <div class="tab active" data-tab="pendaftar">Pendaftar (${regs.length})</div>
+          <div class="tab" data-tab="pembayaran">Pembayaran (${payUnverified})</div>
+          <div class="tab" data-tab="mahasiswa">Akun Mhs (${mhs.length})</div>
+          <div class="tab" data-tab="tagihan">Tagihan (${invUnpaid})</div>
+          <div class="tab" data-tab="krs">KRS (${krsPending})</div>
+          <div class="tab" data-tab="dokumen">Dokumen (${docs.length})</div>
+          <div class="tab" data-tab="pengumuman">Pengumuman (${anns.length})</div>
+          <div class="tab" data-tab="pengaturan">Pengaturan</div>
+          <div class="tab" data-tab="neofeeder">Ekspor NEOFEEDER</div>
+        </div>
+
+        <div class="tabpane active" id="tp-pendaftar">${pendaftarTable(regs)}</div>
+        <div class="tabpane" id="tp-pembayaran">${pembayaranTable(regs)}</div>
+        <div class="tabpane" id="tp-mahasiswa">${mahasiswaTable(mhs)}</div>
+        <div class="tabpane" id="tp-tagihan">${tagihanAdminTable(invs, mhs)}</div>
+        <div class="tabpane" id="tp-krs">${krsAdminTable(krs)}</div>
+        <div class="tabpane" id="tp-dokumen">${dokumenTable(docs)}</div>
+        <div class="tabpane" id="tp-pengumuman">${pengumumanAdminPanel(anns)}</div>
+        <div class="tabpane" id="tp-pengaturan">${pengaturanPanel()}</div>
+        <div class="tabpane" id="tp-neofeeder">${neofeederPanel(regs, invs)}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function bindAdmin(){
+  $$('.tab').forEach(t=>{
+    t.onclick=()=>{
+      $$('.tab').forEach(x=>x.classList.remove('active'));
+      $$('.tabpane').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      $('#tp-'+t.dataset.tab).classList.add('active');
+    };
+  });
+  const btnSaveSet = $('#btnSaveSet');
+  if(btnSaveSet){
+    btnSaveSet.onclick=async ()=>{
+      const f=$('#formSet'); const fd=new FormData(f);
+      const s = { biaya_registrasi:Number(fd.get('biaya_registrasi'))||0,
+        bank_nama:fd.get('bank_nama'), bank_rekening:fd.get('bank_rekening'),
+        bank_atas_nama:fd.get('bank_atas_nama'), bank_cabang:fd.get('bank_cabang') };
+      const { error } = await sb.rpc('save_settings', { p_data: s });
+      if(error){ toast('Gagal: '+error.message,'bad'); return; }
+      await DB.sync(); toast('Pengaturan disimpan','ok'); route();
+    };
+  }
+  const btnAnn = $('#btnCreateAnn');
+  if(btnAnn){
+    btnAnn.onclick=async ()=>{
+      const f=$('#formAnn'); const fd=new FormData(f);
+      const title=String(fd.get('title')||'').trim();
+      const body=String(fd.get('body')||'').trim();
+      if(!title || !body){ toast('Judul dan isi pengumuman wajib diisi','bad'); return; }
+      const { error } = await sb.rpc('create_announcement', { p_title:title, p_body:body });
+      if(error){ toast('Gagal: '+error.message,'bad'); return; }
+      await DB.sync(); toast('Pengumuman terbit','ok'); route();
+    };
+  }
+}
+
+function pendaftarTable(regs){
+  if(!regs.length) return '<div class="empty">Belum ada pendaftar.</div>';
+  const rows = regs.map(r=>`
+    <tr>
+      <td>${fmtDateTime(r.timestamp)}</td>
+      <td><b>${esc(r.nama_lengkap)}</b><br><span class="muted">${esc(r.nama_prodi||'-')} · ${esc(r.instrumen_mayor||'-')}</span></td>
+      <td>${esc(r.hp||'-')}<br><span class="muted">${esc(r.email||'-')}</span></td>
+      <td>${payRegBadge(r.pembayaran)}</td>
+      <td><span class="badge ${r.status}">${statusLabel(r.status)}</span>${r.nim?'<br><span class="file-pill">NIM '+esc(r.nim)+'</span>':''}</td>
+      <td class="right">
+        <button class="btn ghost sm" onclick="viewRegDetail('${r.id}')">Detail</button>
+        ${r.status==='pending'?`
+          <button class="btn ok sm" onclick="approveReg('${r.id}')">Terima</button>
+          <button class="btn bad sm" onclick="rejectReg('${r.id}')">Tolak</button>
+        `:''}
+      </td>
+    </tr>`).join('');
+  return `
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Waktu Daftar</th><th>Nama / Prodi</th><th>Kontak</th><th>Pemb. Registrasi</th><th>Status</th><th class="right">Aksi</th></tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>`;
+}
+
+function pembayaranTable(regs){
+  const claimed = regs.filter(r=>r.pembayaran && r.pembayaran.sudah_bayar && !r.pembayaran.verified);
+  const verified = regs.filter(r=>r.pembayaran && r.pembayaran.verified);
+  const belum = regs.filter(r=>!r.pembayaran || !r.pembayaran.sudah_bayar);
+  const row = (r,act)=>`
+    <tr>
+      <td><b>${esc(r.nama_lengkap)}</b><br><span class="muted">${fmtDateTime(r.timestamp)}</span></td>
+      <td class="money">${rupiah(r.pembayaran?r.pembayaran.jumlah:'-')}</td>
+      <td>${r.pembayaran&&r.pembayaran.tgl_bayar?fmtDate(r.pembayaran.tgl_bayar):'-'}</td>
+      <td>${r.pembayaran&&r.pembayaran.bukti?`<span class="file-pill">${esc(r.pembayaran.bukti.name)}</span>`:'<span class="muted">tidak ada</span>'}</td>
+      <td>${payRegBadge(r.pembayaran)}</td>
+      <td class="right">${act}</td>
+    </tr>`;
+  let html = '<h3>Menunggu Verifikasi</h3>';
+  html += claimed.length ? `<div class="table-wrap"><table>
+    <thead><tr><th>Pendaftar</th><th>Jumlah</th><th>Tgl Transfer</th><th>Bukti</th><th>Status</th><th class="right">Aksi</th></tr></thead>
+    <tbody>${claimed.map(r=>row(r,`
+      ${r.pembayaran.bukti?`<button class="btn ghost sm" onclick="downloadBuktiReg('${r.id}')">Unduh Bukti</button>`:''}
+      <button class="btn ok sm" onclick="verifyRegPayment('${r.id}',true)">Verifikasi Lunas</button>
+      <button class="btn bad sm" onclick="verifyRegPayment('${r.id}',false)">Tolak</button>`)).join('')}</tbody></table></div>`
+    : '<div class="empty">Tidak ada pembayaran menunggu verifikasi.</div>';
+  html += '<h3 class="mt2">Sudah Terverifikasi</h3>';
+  html += verified.length ? `<div class="table-wrap"><table>
+    <thead><tr><th>Pendaftar</th><th>Jumlah</th><th>Tgl Transfer</th><th>Bukti</th><th>Status</th><th class="right">Aksi</th></tr></thead>
+    <tbody>${verified.map(r=>row(r,`
+      ${r.pembayaran.bukti?`<button class="btn ghost sm" onclick="downloadBuktiReg('${r.id}')">Unduh Bukti</button>`:''}
+      <button class="btn ghost sm" onclick="verifyRegPayment('${r.id}',false)">Batalkan</button>`)).join('')}</tbody></table></div>`
+    : '<div class="empty">Belum ada pembayaran terverifikasi.</div>';
+  html += '<h3 class="mt2">Belum Melakukan Pembayaran</h3>';
+  html += belum.length ? `<div class="table-wrap"><table>
+    <thead><tr><th>Pendaftar</th><th>Jumlah</th><th>Tgl Transfer</th><th>Bukti</th><th>Status</th><th class="right">Aksi</th></tr></thead>
+    <tbody>${belum.map(r=>row(r,`<span class="muted">—</span>`)).join('')}</tbody></table></div>`
+    : '<div class="empty">Semua pendaftar sudah mengklaim pembayaran.</div>';
+  return html;
+}
+
+function downloadBuktiReg(id){
+  const r = DB.getReg().find(x=>x.id===id);
+  if(!r || !r.pembayaran || !r.pembayaran.bukti || !r.pembayaran.bukti.path){ toast('Tidak ada bukti','warn'); return; }
+  downloadStorageFile(r.pembayaran.bukti.path, r.pembayaran.bukti.name);
+}
+
+async function verifyRegPayment(id, ok){
+  const r = DB.getReg().find(x=>x.id===id); if(!r) return;
+  const pay = r.pembayaran || {sudah_bayar:false,jumlah:0,bukti:null};
+  if(ok){
+    pay.verified = true; pay.verified_at = Date.now(); pay.sudah_bayar = true;
+  } else {
+    if(!confirm('Tolak/batalkan klaim pembayaran '+(r.data?.nama_lengkap||r.nama_lengkap||'')+'?')) return;
+    pay.verified = false; pay.verified_at = null;
+  }
+  const { error } = await sb.rpc('update_registration', { p_id:id, p_patch:{ pembayaran: pay } });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync();
+  toast(ok ? 'Pembayaran diverifikasi LUNAS' : 'Klaim pembayaran dibatalkan', ok?'ok':'warn'); route();
+}
+
+function mahasiswaTable(mhs){
+  if(!mhs.length) return '<div class="empty">Belum ada akun mahasiswa. Setujui pendaftar untuk membuat akun.</div>';
+  const rows = mhs.map(m=>{
+    const docs = DB.getDoc().filter(d=>d.owner===m.id);
+    const invs = DB.getInv().filter(i=>(i.username===m.username||i.owner===m.id) && i.status!=='lunas');
+    return `<tr>
+      <td><b>${esc(m.nim||'-')}</b></td>
+      <td>${esc(m.nama)}<br><span class="muted">@${esc(m.username)}</span></td>
+      <td>${esc(m.prodi||'-')}</td>
+      <td>${docs.length} berkas</td>
+      <td>${invs.length? '<span class="badge belum">'+invs.length+' belum lunas</span>':'<span class="badge lunas">lunas semua</span>'}</td>
+      <td>${fmtDate(m.created)}</td>
+      <td class="right">
+        <button class="btn ghost sm" onclick="resetPass('${m.username}')">Reset Password</button>
+        <button class="btn bad sm" onclick="delAcc('${m.username}')">Hapus</button>
+      </td>
+    </tr>`;
+  }).join('');
+  return `<div class="table-wrap"><table>
+    <thead><tr><th>NIM</th><th>Nama / User</th><th>Prodi</th><th>Dokumen</th><th>Tagihan</th><th>Dibuat</th><th class="right">Aksi</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+
+/* ---------- Tagihan (invoice) ---------- */
+function tagihanAdminTable(invs, mhs){
+  let html = `
+    <div class="btn-row mb">
+      <button class="btn" onclick="openCreateInvoice()">+ Buat Tagihan (satu mahasiswa)</button>
+      <button class="btn gold" onclick="openMassInvoice()">+ Tagihan Massal (UKT semua mahasiswa)</button>
+    </div>`;
+  if(!invs.length) return html + '<div class="empty">Belum ada tagihan.</div>';
+  const rows = invs.map(v=>`
+    <tr>
+      <td><b>${esc(v.no_inv)}</b></td>
+      <td>${esc(v.nama)}<br><span class="muted">${esc(v.nim||'-')}</span></td>
+      <td>${esc(v.jenis)}${v.semester?' <span class="file-pill">Smt '+esc(v.semester)+'</span>':''}<br><span class="muted">${esc(v.tahun_ajaran||'')}</span></td>
+      <td class="money">${rupiah(v.jumlah)}</td>
+      <td>${v.jatuh_tempo?fmtDate(v.jatuh_tempo):'-'}</td>
+      <td>${invoiceStatusLabel(v.status)}</td>
+      <td class="right">
+        ${v.status==='claimed'&&v.bukti?`<button class="btn ghost sm" onclick="downloadBuktiInv('${v.id}')">Bukti</button>`:''}
+        ${v.status==='claimed'?`<button class="btn ok sm" onclick="verifyInvoice('${v.id}',true)">Lunasi</button>`:''}
+        ${v.status==='lunas'?`<button class="btn ghost sm" onclick="verifyInvoice('${v.id}',false)">Batalkan</button>`:''}
+        <button class="btn bad sm" onclick="delInvoice('${v.id}')">Hapus</button>
+      </td>
+    </tr>`).join('');
+  return html + `<div class="table-wrap"><table>
+    <thead><tr><th>No. Invoice</th><th>Mahasiswa</th><th>Jenis</th><th>Jumlah</th><th>Jatuh Tempo</th><th>Status</th><th class="right">Aksi</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+
+function invNo(){
+  return 'INV-' + Date.now().toString(36).toUpperCase();
+}
+function openCreateInvoice(){
+  const mhs = DB.getAcc().filter(a=>a.role==='mahasiswa');
+  if(!mhs.length){ toast('Belum ada mahasiswa','warn'); return; }
+  const options = mhs.map(m=>`<option value="${esc(m.username)}">${esc(m.nim)} — ${esc(m.nama)}</option>`).join('');
+  openModal('Buat Tagihan Mahasiswa', `
+    <form id="formInv" onsubmit="return false">
+      <div class="form-grid">
+        <div class="full">
+          <label>Mahasiswa <span class="req">*</span></label>
+          <select name="username" required>${options}</select>
+        </div>
+        <div>
+          <label>Jenis Tagihan <span class="req">*</span></label>
+          <select name="jenis" required>${INV_TYPES.map(t=>`<option>${t}</option>`).join('')}</select>
+        </div>
+        <div>
+          <label>Jumlah (Rp) <span class="req">*</span></label>
+          <input name="jumlah" type="number" min="1000" step="1000" required placeholder="mis. 5000000">
+        </div>
+        <div>
+          <label>Semester</label>
+          <select name="semester">
+            <option value="">-</option>
+            ${[1,2,3,4,5,6,7,8].map(s=>`<option value="${s}">Semester ${s}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label>Tahun Ajaran</label>
+          <input name="tahun_ajaran" placeholder="mis. 2026/2027">
+        </div>
+        <div class="full">
+          <label>Jatuh Tempo</label>
+          <input type="date" name="jatuh_tempo">
+        </div>
+      </div>
+    </form>`,
+    `<button class="btn ghost" onclick="closeModal()">Batal</button>
+     <button class="btn" onclick="saveInvoice(false)">Simpan</button>`);
+}
+function openMassInvoice(){
+  const mhs = DB.getAcc().filter(a=>a.role==='mahasiswa');
+  if(!mhs.length){ toast('Belum ada mahasiswa','warn'); return; }
+  openModal('Tagihan Massal — Semua Mahasiswa', `
+    <div class="alert info">Tagihan akan dibuat untuk <b>${mhs.length} mahasiswa</b>.</div>
+    <form id="formInv" onsubmit="return false">
+      <div class="form-grid">
+        <div>
+          <label>Jenis Tagihan</label>
+          <select name="jenis">${INV_TYPES.map(t=>`<option>${t}</option>`).join('')}</select>
+        </div>
+        <div>
+          <label>Jumlah (Rp) <span class="req">*</span></label>
+          <input name="jumlah" type="number" min="1000" step="1000" required placeholder="mis. 5000000">
+        </div>
+        <div>
+          <label>Semester</label>
+          <select name="semester">
+            <option value="">-</option>
+            ${[1,2,3,4,5,6,7,8].map(s=>`<option value="${s}" ${s===1?'selected':''}>Semester ${s}</option>`).join('')}
+          </select>
+        </div>
+        <div>
+          <label>Tahun Ajaran</label>
+          <input name="tahun_ajaran" placeholder="mis. 2026/2027" value="${new Date().getFullYear()}/${new Date().getFullYear()+1}">
+        </div>
+        <div class="full">
+          <label>Jatuh Tempo</label>
+          <input type="date" name="jatuh_tempo">
+        </div>
+      </div>
+    </form>`,
+    `<button class="btn ghost" onclick="closeModal()">Batal</button>
+     <button class="btn gold" onclick="saveInvoice(true)">Buat untuk ${mhs.length} Mahasiswa</button>`);
+}
+async function saveInvoice(mass){
+  const f=$('#formInv'); if(!f) return;
+  const fd=new FormData(f);
+  const jumlah = Number(fd.get('jumlah'));
+  if(!jumlah || jumlah<1000){ toast('Jumlah tidak valid','bad'); return; }
+  const mhs = DB.getAcc().filter(a=>a.role==='mahasiswa');
+  const targetEmail = fd.get('username');
+  const targets = mass ? mhs : mhs.filter(m=>m.username===targetEmail);
+  if(!targets.length){ toast('Tidak ada target','warn'); return; }
+  const p_inv = { email: targetEmail, username: targetEmail,
+    jenis: fd.get('jenis'), jumlah,
+    semester: fd.get('semester')||'', tahun_ajaran: fd.get('tahun_ajaran')||'',
+    jatuh_tempo: fd.get('jatuh_tempo')||'' };
+  const { error } = await sb.rpc('create_invoice', { p_inv, p_mass: !!mass });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync();
+  closeModal();
+  toast((mass?targets.length+' tagihan massal':'Tagihan')+' dibuat','ok');
+  route();
+}
+function downloadBuktiInv(id){
+  const v = DB.getInv().find(x=>x.id===id);
+  if(!v || !v.bukti){ toast('Tidak ada bukti','warn'); return; }
+  downloadStorageFile(v.bukti.path, v.bukti.name);
+}
+async function verifyInvoice(id, ok){
+  const v = DB.getInv().find(x=>x.id===id); if(!v) return;
+  let patch;
+  if(ok){ patch = { status:'lunas' }; }
+  else {
+    if(!confirm('Batalkan status lunas tagihan '+v.no_inv+'?')) return;
+    patch = { status: v.bukti? 'claimed':'unpaid' };
+  }
+  const { error } = await sb.rpc('update_invoice', { p_id:id, p_patch: patch });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync();
+  toast(ok ? ('Tagihan '+v.no_inv+' LUNAS') : 'Status tagihan dibatalkan', ok?'ok':'warn'); route();
+}
+async function delInvoice(id){
+  if(!confirm('Hapus tagihan ini?')) return;
+  const { error } = await sb.rpc('delete_invoice', { p_id:id });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync(); toast('Tagihan dihapus','warn'); route();
+}
+
+/* ---------- KRS admin ---------- */
+function krsAdminTable(krs){
+  if(!krs.length) return '<div class="empty">Belum ada KRS diajukan.</div>';
+  const rows = krs.map(k=>`
+    <tr>
+      <td>${fmtDateTime(k.submitted_at)}</td>
+      <td><b>${esc(k.nama)}</b><br><span class="muted">${esc(k.nim||'-')}</span></td>
+      <td>Smt ${esc(k.semester)}<br><span class="muted">${esc(k.tahun_ajaran||'')}</span></td>
+      <td>${k.courses.map(c=>esc(c.kode)).join(', ')}<br><span class="muted">${k.courses.length} MK · <b>${k.total_sks}</b> SKS</span></td>
+      <td>${krsStatusLabel(k.status)}</td>
+      <td class="right">
+        ${k.status==='pending'?`
+          <button class="btn ok sm" onclick="decideKRS('${k.id}','approved')">Setujui</button>
+          <button class="btn bad sm" onclick="decideKRS('${k.id}','rejected')">Tolak</button>
+        `:`<button class="btn ghost sm" onclick="decideKRS('${k.id}','pending')">Reset</button>`}
+      </td>
+    </tr>`).join('');
+  return `<div class="table-wrap"><table>
+    <thead><tr><th>Diajukan</th><th>Mahasiswa</th><th>Semester</th><th>Mata Kuliah</th><th>Status</th><th class="right">Aksi</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+async function decideKRS(id, status){
+  const k = DB.getKRS().find(x=>x.id===id); if(!k) return;
+  if(status==='rejected' && !confirm('Tolak KRS ini?')) return;
+  const { error } = await sb.rpc('update_krs', { p_id:id, p_status: status });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync();
+  toast('KRS '+(status==='approved'?'disetujui':status==='rejected'?'ditolak':'direset'), status==='rejected'?'warn':'ok');
+  route();
+}
+
+/* ---------- Dokumen admin ---------- */
+function dokumenTable(docs){
+  if(!docs.length) return '<div class="empty">Belum ada dokumen diunggah mahasiswa.</div>';
+  const rows = docs.map(d=>`<tr>
+    <td>${fmtDateTime(d.uploaded)}</td>
+    <td>${esc(d.owner)}${d.nama?'<br><span class="muted">'+esc(d.nama)+'</span>':''}</td>
+    <td><b>${docTypeLabel(d.type)}</b></td>
+    <td><span class="file-pill">${esc(d.fileName)}</span><br><span class="muted">${(d.size/1024).toFixed(0)} KB</span></td>
+    <td>${esc(d.semester||'-')}</td>
+    <td class="right">
+      <button class="btn ghost sm" onclick="downloadDoc('${d.id}')">Unduh</button>
+      <button class="btn bad sm" onclick="delDoc('${d.id}')">Hapus</button>
+    </td>
+  </tr>`).join('');
+  return `<div class="table-wrap"><table>
+    <thead><tr><th>Waktu</th><th>Mahasiswa</th><th>Jenis</th><th>File</th><th>Semester</th><th class="right">Aksi</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`;
+}
+
+/* ---------- Pengumuman admin ---------- */
+function pengumumanAdminPanel(anns){
+  let html = `
+    <div class="card">
+      <h3>Buat Pengumuman</h3>
+      <form id="formAnn" onsubmit="return false">
+        <div class="form-grid">
+          <div class="full"><label>Judul <span class="req">*</span></label><input name="title" required placeholder="mis. Jadwal Audisi Gelombang 2"></div>
+          <div class="full"><label>Isi Pengumuman <span class="req">*</span></label><textarea name="body" required style="min-height:100px"></textarea></div>
+          <div class="full btn-row"><button class="btn" id="btnCreateAnn">Terbitkan</button></div>
+        </div>
+      </form>
+    </div>`;
+  if(!anns.length) return html + '<div class="empty">Belum ada pengumuman.</div>';
+  html += anns.map(a=>`
+    <div class="ann-item">
+      <b>${esc(a.title)}</b> <span class="date">— ${fmtDateTime(a.created_at)} oleh ${esc(a.author)}</span>
+      <p style="margin:6px 0 0;white-space:pre-wrap">${esc(a.body)}</p>
+      <div class="btn-row"><button class="btn bad sm" onclick="delAnn('${a.id}')">Hapus</button></div>
+    </div>`).join('');
+  return html;
+}
+async function delAnn(id){
+  if(!confirm('Hapus pengumuman ini?')) return;
+  const { error } = await sb.rpc('delete_announcement', { p_id:id });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync(); toast('Pengumuman dihapus','warn'); route();
+}
+
+/* ---------- Pengaturan ---------- */
+function pengaturanPanel(){
+  const st = DB.getSet();
+  return `
+    <div class="card">
+      <h3>Biaya &amp; Rekening Pembayaran</h3>
+      <p class="muted mb">Nominal ini tampil di halaman depan dan formulir pendaftaran.</p>
+      <form id="formSet" onsubmit="return false">
+        <div class="form-grid">
+          <div class="full">
+            <label>Biaya Registrasi / Formulir (Rp)</label>
+            <input type="number" min="0" step="1000" name="biaya_registrasi" value="${st.biaya_registrasi}">
+          </div>
+          <div><label>Nama Bank</label><input name="bank_nama" value="${esc(st.bank_nama)}"></div>
+          <div><label>No. Rekening</label><input name="bank_rekening" value="${esc(st.bank_rekening)}"></div>
+          <div><label>Atas Nama</label><input name="bank_atas_nama" value="${esc(st.bank_atas_nama)}"></div>
+          <div><label>Cabang</label><input name="bank_cabang" value="${esc(st.bank_cabang)}"></div>
+          <div class="full btn-row"><button class="btn" id="btnSaveSet">Simpan Pengaturan</button></div>
+        </div>
+      </form>
+    </div>
+    <div class="card">
+      <h3>Data &amp; Sistem</h3>
+      <div class="kv">
+        <dt>Versi Aplikasi</dt><dd>${APP_VERSION} (Supabase)</dd>
+        <dt>Penyimpanan</dt><dd>Server Supabase (PostgreSQL + Storage) — terpusat, multi-user</dd>
+        <dt>Auth</dt><dd>Supabase Auth (email + password, hash)</dd>
+      </div>
+      <p class="muted mt" style="line-height:1.55">ℹ️ Data tersimpan di server Supabase, bukan browser. Admin &amp; mahasiswa melihat data yang sama. Password di-hash oleh Supabase Auth. Dokumen disimpan di Storage bucket <code>stikmi-docs</code> dengan kebijakan per-pengguna (RLS). Backup di bawah adalah cuplikan data yang sedang dimuat di memori admin.</p>
+      <div class="btn-row mt">
+        <button class="btn ghost sm" onclick="exportBackup()">Unduh Cuplikan Data (JSON)</button>
+        <button class="btn bad sm" onclick="wipeAll()">Reset Data (via SQL)</button>
+      </div>
+    </div>`;
+}
+function exportBackup(){
+  const payload = {
+    exported_at: new Date().toISOString(), app:'SIAKAD STIKMI', version:APP_VERSION,
+    registrations: DB.getReg(), accounts: DB.getAcc().map(a=>({...a})),
+    documents: DB.getDoc(), invoices: DB.getInv(), krs: DB.getKRS(),
+    announcements: DB.getAnn(), settings: DB.getSet()
+  };
+  triggerDownload(new Blob([JSON.stringify(payload,null,2)],{type:'application/json'}),'stikmi_backup_'+stamp()+'.json');
+  toast('Backup diunduh','ok');
+}
+function wipeAll(){
+  toast('Data tersimpan di server Supabase (bukan browser). Untuk reset data, jalankan SQL TRUNCATE di Supabase SQL Editor (lihat PANDUAN_SETUP_SUPABASE.md). Tombol ini dinonaktifkan di mode Supabase.','warn');
+}
+
+/* ---------- NEOFEEDER export ---------- */
+function neofeederPanel(regs, invs){
+  const accepted = regs.filter(r=>r.status==='accepted');
+  return `
+    <div class="form-note">Ekspor data mahasiswa diterima dalam format menyerupai struktur Feeder LLDIKTI (tabel <code>mahasiswa</code>, <code>mahasiswa_pt</code>) untuk kemudahan import ke NEOFEEDER. Verifikasi ulang di sistem Feeder resmi sebelum submit.</div>
+    <div class="btn-row">
+      <button class="btn" onclick="exportNEO('json')">⬇ Ekspor JSON (Feeder-style)</button>
+      <button class="btn ghost" onclick="exportNEO('csv')">⬇ CSV mahasiswa_pt</button>
+      <button class="btn ghost" onclick="exportNEO('csv_reg')">⬇ CSV pendaftar (lengkap)</button>
+      <button class="btn ghost" onclick="exportNEO('csv_inv')">⬇ CSV tagihan</button>
+    </div>
+    <div class="mt"><h3>Pratinjau (${accepted.length} mahasiswa diterima)</h3></div>
+    ${accepted.length? `
+      <div class="table-wrap"><table>
+        <thead><tr><th>NIM</th><th>Nama</th><th>Prodi</th><th>Konsentrasi</th><th>Instrumen</th><th>Jalur</th><th>Bayar Reg.</th></tr></thead>
+        <tbody>${accepted.map(r=>`<tr>
+          <td><b>${esc(r.nim)}</b></td><td>${esc(r.nama_lengkap)}</td><td>${esc(r.nama_prodi)}</td>
+          <td>${esc((r.konsentrasi||[]).join(', '))}</td><td>${esc(r.instrumen_mayor)}</td>
+          <td>${esc(r.jalur_masuk_label)}</td><td>${r.pembayaran&&r.pembayaran.verified?'Lunas':'-'}</td>
+        </tr>`).join('')}</tbody></table></div>` : '<div class="empty">Belum ada mahasiswa diterima.</div>'}
+  `;
+}
+function exportNEO(kind){
+  const regs = DB.getReg().filter(r=>r.status==='accepted');
+  if((kind==='json'||kind==='csv') && !regs.length){ toast('Tidak ada mahasiswa diterima untuk diekspor','warn'); return; }
+  const feederRows = regs.map(r=>({
+    nim: r.nim,
+    nama_mahasiswa: r.nama_lengkap,
+    nik: r.nik,
+    tempat_lahir: r.tempat_lahir,
+    tanggal_lahir: r.tanggal_lahir,
+    jenis_kelamin: r.jenis_kelamin,
+    agama_id: agamaId(r.agama),
+    nama_agama: r.agama,
+    kewarganegaraan: r.kewarganegaraan,
+    status_sipil: statusSipilCode(r.status_sipil),
+    jalan: r.jalan, rt_rw: r.rt_rw, kel_kec: r.kel_kec,
+    kab_kota: r.kab_kota, kode_pos: r.kode_pos,
+    nama_wilayah: r.provinsi,
+    handphone: r.hp, telepon: r.telepon, email: r.email,
+    id_pendaftar: r.id,
+    tanggal_masuk_kuliah: r.tgl_masuk_kuliah,
+    nama_ibu_kandung: r.nama_ortu,
+    id_prodi: r.id_prodi,
+    nama_program_studi: r.nama_prodi,
+    peminatan_program: r.peminatan_program,
+    konsentrasi: (r.konsentrasi||[]).join('; '),
+    instrumen_mayor: r.instrumen_mayor,
+    jalur_masuk: r.jalur_masuk,
+    semester_masuk: r.semester_mulai,
+    kelas: r.kelas,
+    nisn: r.nisn,
+    nama_sekolah_asal: r.nama_sma,
+    tahun_lulus_sma: r.tahun_lulus_sma,
+    pembayaran_registrasi: r.pembayaran&&r.pembayaran.verified?'lunas':'belum',
+    perguruan_tinggi: 'STIKMI - Sekolah Tinggi Internasional Konservatori Musik Indonesia'
+  }));
+  let blob, name;
+  if(kind==='json'){
+    const payload = {
+      perguruan_tinggi:'STIKMI', generated_at:new Date().toISOString(),
+      feeder_tables:{ mahasiswa_pt: feederRows }, count: feederRows.length
+    };
+    blob = new Blob([JSON.stringify(payload,null,2)],{type:'application/json'});
+    name = 'stikmi_neofeeder_'+stamp()+'.json';
+  } else if(kind==='csv'){
+    const cols = Object.keys(feederRows[0]);
+    const lines=[cols.join(',')];
+    feederRows.forEach(r=>lines.push(cols.map(c=>csvCell(r[c])).join(',')));
+    blob = new Blob([lines.join('\n')],{type:'text/csv'});
+    name = 'stikmi_mahasiswa_pt_'+stamp()+'.csv';
+  } else if(kind==='csv_reg'){
+    const all = DB.getReg();
+    const cols = ['timestamp','status','nama_lengkap','nik','jenis_kelamin','hp','email','id_prodi','nama_prodi','peminatan_program','konsentrasi','instrumen_mayor','jalur_masuk_label','tgl_masuk_kuliah','kelas','nama_sma','tahun_lulus_sma','username','nim','pembayaran_status'];
+    const lines=[cols.join(',')];
+    all.forEach(r=>{
+      const pay = r.pembayaran? (r.pembayaran.verified?'lunas':r.pembayaran.sudah_bayar?'claimed':'belum') : 'belum';
+      const row = {...r, konsentrasi:(r.konsentrasi||[]).join('; '), pembayaran_status:pay};
+      lines.push(cols.map(c=>csvCell(row[c])).join(','));
+    });
+    blob = new Blob([lines.join('\n')],{type:'text/csv'});
+    name = 'stikmi_pendaftar_'+stamp()+'.csv';
+  } else {
+    const invs = DB.getInv();
+    if(!invs.length){ toast('Tidak ada tagihan','warn'); return; }
+    const cols = ['no_inv','nim','nama','jenis','jumlah','semester','tahun_ajaran','jatuh_tempo','status','tgl_bayar'];
+    const lines=[cols.join(',')];
+    invs.forEach(v=>lines.push(cols.map(c=>csvCell(v[c])).join(',')));
+    blob = new Blob([lines.join('\n')],{type:'text/csv'});
+    name = 'stikmi_tagihan_'+stamp()+'.csv';
+  }
+  triggerDownload(blob,name);
+  toast('Ekspor selesai: '+name,'ok');
+}
+function agamaId(a){ return ({Islam:'1',Kristen:'2',Katolik:'3',Hindu:'4',Buddha:'5',Konghucu:'6'})[a]||'99'; }
+function statusSipilCode(s){ return s==='Kawin'?'1':'0'; }
+function csvCell(v){
+  if(v===null||v===undefined) return '';
+  const s=String(v);
+  return /[",\n]/.test(s) ? '"'+s.replace(/"/g,'""')+'"' : s;
+}
+function stamp(){ const d=new Date(); const p=n=>String(n).padStart(2,'0'); return d.getFullYear()+p(d.getMonth()+1)+p(d.getDate())+'_'+p(d.getHours())+p(d.getMinutes()); }
+
+/* ---------- Admin: detail & aksi pendaftar ---------- */
+function viewRegDetail(id){
+  const r = DB.getReg().find(x=>x.id===id); if(!r) return;
+  window._berkasDL = window._berkasDL||{};
+  const regDL = (key, b)=>{
+    if(b) window._berkasDL[key] = {path:b.path, name:b.name};
+    return key;
+  };
+  regDL(r.id+'__BuktiTransfer', r.pembayaran&&r.pembayaran.bukti);
+  regDL(r.id+'__PasFoto', r.berkas.foto);
+  regDL(r.id+'__IjazahSKL', r.berkas.ijazah);
+  regDL(r.id+'__KTPKK', r.berkas.ktp);
+  const dlBtn = (key)=>`<button class="btn ghost sm" onclick="dlBerkas('${key}')">Unduh</button>`;
+  const berkasItem = (key,label,b)=> b? `<div class="doc-item"><div class="meta"><b>${label}</b><br>${esc(b.name)} — ${(b.size/1024).toFixed(0)} KB</div>${dlBtn(key)}</div>` : '';
+  const kv = (k,v)=>`<dt>${k}</dt><dd>${v??'-'}</dd>`;
+  const p = r.pembayaran||{};
+  const html = `
+    <div class="kv">
+      ${kv('Status',`<span class="badge ${r.status}">${statusLabel(r.status)}</span>`+(r.nim?' &nbsp;NIM: <b>'+esc(r.nim)+'</b>':''))}
+      ${kv('No. Audisi',`<input id="inpNoAudisi" value="${esc(r.no_audisi||'')}" placeholder="diisi petugas" style="max-width:160px;display:inline-block;padding:6px 8px"> <button class="btn ghost sm" onclick="setNoAudisi('${r.id}')">Simpan</button>`)}
+      ${kv('Waktu Daftar',fmtDateTime(r.timestamp))}
+      ${kv('Program Studi',esc(r.nama_prodi))}
+      ${kv('Peminatan Program',esc(r.peminatan_program))}
+      ${kv('Konsentrasi',(r.konsentrasi||[]).join(', '))}
+      ${kv('Instrumen Mayor',esc(r.instrumen_mayor)+(r.instrumen_mayor_lain?' — '+esc(r.instrumen_mayor_lain):''))}
+    </div>
+    <h4 class="mt2">Data Diri</h4>
+    <div class="kv">
+      ${kv('Nama Lengkap',esc(r.nama_lengkap))}
+      ${kv('NIK',esc(r.nik))}
+      ${kv('Tempat, Tgl Lahir',esc(r.tempat_lahir)+', '+fmtDate(r.tanggal_lahir))}
+      ${kv('Jenis Kelamin',r.jenis_kelamin==='L'?'Laki-laki':'Perempuan')}
+      ${kv('Agama',esc(r.agama))}
+      ${kv('Kewarganegaraan',esc(r.kewarganegaraan))}
+      ${kv('Status Sipil',esc(r.status_sipil))}
+      ${kv('Alamat',[esc(r.jalan),r.rt_rw?'RT/RW '+esc(r.rt_rw):'',esc(r.kel_kec),esc(r.kab_kota),esc(r.provinsi),r.kode_pos?esc(r.kode_pos):''].filter(Boolean).join(', '))}
+      ${kv('Telepon',esc(r.telepon))}
+      ${kv('HP',esc(r.hp))}
+      ${kv('Email',esc(r.email))}
+    </div>
+    <h4 class="mt2">Orang Tua / Wali</h4>
+    <div class="kv">
+      ${kv('Nama',esc(r.nama_ortu))}
+      ${kv('Pekerjaan',esc(r.kerja_ortu))}
+      ${kv('Penghasilan',r.penghasilan_ortu==='lt10'?'< Rp 10.000.000/bulan':r.penghasilan_ortu==='gt10'?'> Rp 10.000.000/bulan':'-')}
+      ${kv('Alamat',esc(r.alamat_ortu)||'<span class="muted">(sama dengan mahasiswa)</span>')}
+      ${kv('Telepon / HP',[esc(r.telepon_ortu),esc(r.hp_ortu)].filter(Boolean).join(' / ')||'-')}
+      ${kv('Email',esc(r.email_ortu))}
+    </div>
+    <h4 class="mt2">Riwayat Pendidikan Formal</h4>
+    <div class="kv">
+      ${kv('SMA',[esc(r.nama_sma),r.jurusan_sma?'Jurusan '+esc(r.jurusan_sma):''].filter(Boolean).join(' · '))}
+      ${kv('Tahun Lulus SMA',esc(r.tahun_lulus_sma))}
+      ${kv('NISN',esc(r.nisn))}
+      ${kv('Perguruan Tinggi Asal',[esc(r.pt_sebelumnya),esc(r.jurusan_pt),esc(r.tahun_pt)].filter(Boolean).join(' · ')||'-')}
+    </div>
+    <h4 class="mt2">Riwayat Musik</h4>
+    <div class="kv">
+      ${kv('Lama Belajar',esc(r.lama_belajar))}
+      ${kv('Tingkat/Grade',esc(r.tingkat_grade))}
+      ${kv('Sekolah Musik',esc(r.sekolah_musik))}
+      ${kv('Guru',esc(r.guru_musik))}
+      ${kv('Repertoar',`<span style="white-space:pre-wrap">${esc(r.repertoar)}</span>`)}
+      ${kv('Kompetisi/Festival',`<span style="white-space:pre-wrap">${esc(r.kompetisi)}</span>`)}
+      ${kv('Prestasi',`<span style="white-space:pre-wrap">${esc(r.prestasi)}</span>`)}
+      ${kv('Instrumen Lain',[esc(r.instrumen_lain),r.lama_belajar_lain?'('+esc(r.lama_belajar_lain)+')':''].filter(Boolean).join(' '))}
+    </div>
+    <h4 class="mt2">Bahan Audisi</h4>
+    <div style="white-space:pre-wrap;background:var(--maroon-soft);padding:10px 14px;border-radius:8px;font-size:.88rem">${esc(r.bahan_audisi)}</div>
+    <h4 class="mt2">Motivasi</h4>
+    <div style="white-space:pre-wrap;background:var(--maroon-soft);padding:10px 14px;border-radius:8px;font-size:.88rem">${esc(r.motivasi)}</div>
+    <h4 class="mt2">Data LLDIKTI/NEOFEEDER</h4>
+    <div class="kv">
+      ${kv('Jalur Masuk',esc(r.jalur_masuk_label))}
+      ${kv('Tgl Masuk Kuliah',fmtDate(r.tgl_masuk_kuliah))}
+      ${kv('Semester Mulai',esc(r.semester_mulai))}
+      ${kv('Kelas',esc(r.kelas))}
+    </div>
+    <h4 class="mt2">Pembayaran Registrasi</h4>
+    <div class="pay-box">
+      <div class="kv">
+        ${kv('Jumlah','<span class="money">'+rupiah(p.jumlah)+'</span>')}
+        ${kv('Klaim Pembayaran',p.sudah_bayar?'Sudah dibayar':'<span class="badge belum">BELUM</span>')}
+        ${kv('Tgl Transfer',p.tgl_bayar?fmtDate(p.tgl_bayar):'-')}
+        ${kv('Status',payRegBadge(p))}
+      </div>
+      ${p.bukti?`<div class="btn-row mt">${dlBtn(r.id+'__BuktiTransfer')}</div>`:''}
+    </div>
+    <h4 class="mt2">Berkas Pendukung</h4>
+    ${berkasItem(r.id+'__PasFoto','Pas Foto',r.berkas.foto)}
+    ${berkasItem(r.id+'__IjazahSKL','Ijazah/SKL',r.berkas.ijazah)}
+    ${berkasItem(r.id+'__KTPKK','KTP/KK',r.berkas.ktp)}
+    <div class="kv mt2">
+      ${kv('Username diminta',esc(r.username))}
+    </div>
+  `;
+  const footer = r.status==='pending' ? `
+    <button class="btn bad" onclick="rejectReg('${r.id}');closeModal();">Tolak</button>
+    ${r.pembayaran&&r.pembayaran.sudah_bayar&&!r.pembayaran.verified?`<button class="btn gold" onclick="verifyRegPayment('${r.id}',true);closeModal();">Verifikasi Bayar</button>`:''}
+    <button class="btn ok" onclick="approveReg('${r.id}');closeModal();">Terima &amp; Buat Akun</button>
+  ` : `<button class="btn ghost" onclick="closeModal()">Tutup</button>`;
+  openModal('Detail Pendaftar — '+r.nama_lengkap, html, footer);
+}
+function dlBerkas(key){
+  const it = (window._berkasDL||{})[key];
+  if(!it || !it.path){ toast('Berkas tidak ditemukan','bad'); return; }
+  downloadStorageFile(it.path, it.name);
+}
+async function setNoAudisi(id){
+  const inp = $('#inpNoAudisi'); if(!inp) return;
+  const val = inp.value.trim();
+  const { error } = await sb.rpc('update_registration', { p_id:id, p_patch:{ data:{ no_audisi: val } } });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync();
+  toast('No. Audisi disimpan: '+(val||'(kosong)'),'ok');
+}
+async function approveReg(id){
+  const r = DB.getReg().find(x=>x.id===id); if(!r) return;
+  if(r.status==='accepted'){ toast('Sudah diterima sebelumnya','warn'); return; }
+  const defaultNIM = genNIM();
+  const nim = prompt('Konfirmasi NIM untuk '+(r.nama_lengkap||r.data?.nama_lengkap||'')+' (kosongkan untuk otomatis):', defaultNIM);
+  if(nim===null) return;
+  const { data, error } = await sb.rpc('approve_registration', { p_id:id, p_nim: nim? nim.trim():'' });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync();
+  const finalNim = (data && data.nim) || nim || '(auto)';
+  const email = (data && data.email) || r.email || r.data?.email || '(tidak diketahui)';
+  toast('Diterima. NIM '+finalNim,'ok');
+  openModal('Mahasiswa Diterima',
+    `<div class="alert ok">Akun mahasiswa telah diaktifkan. Beritahu mahasiswa untuk <b>login memakai email &amp; password</b> yang didaftarkan.</div>
+     <div class="kv">
+       <dt>Nama</dt><dd>${esc(r.nama_lengkap||r.data?.nama_lengkap||'')}</dd>
+       <dt>NIM</dt><dd><b>${esc(finalNim)}</b></dd>
+       <dt>Email login</dt><dd>${esc(email)}</dd>
+       <dt>Prodi</dt><dd>${esc(r.nama_prodi||r.data?.nama_prodi||'')}</dd>
+       <dt>Pemb. Registrasi</dt><dd>${payRegBadge(r.pembayaran)}</dd>
+     </div>`,
+    `<button class="btn" onclick="closeModal()">OK</button>`);
+  route();
+}
+async function rejectReg(id){
+  if(!confirm('Tolak pendaftar ini? Status menjadi DITOLAK.')) return;
+  const { error } = await sb.rpc('update_registration', { p_id:id, p_patch:{ status:'rejected' } });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync(); toast('Pendaftar ditolak','warn'); route();
+}
+async function resetPass(email){
+  if(!confirm('Kirim tautan reset password ke '+email+'?')) return;
+  const { error } = await sendPasswordReset(email);
+  if(error){ toast('Gagal kirim: '+error.message+'. Alternatif: reset via dashboard Supabase → Authentication → Users.','bad'); return; }
+  toast('Tautan reset password dikirim ke '+email,'ok');
+}
+function delAcc(email){
+  toast('Penghapusan akun tidak bisa dari aplikasi (alasan keamanan). Hapus via dashboard Supabase: Authentication → Users → cari '+email+' → Delete. Data dokumen/KRS/tagihan terkait akan terhapus otomatis.','warn');
+}
+async function delDoc(id){
+  if(!confirm('Hapus dokumen ini? File di storage juga akan dihapus.')) return;
+  const d = DB.getDoc().find(x=>x.id===id);
+  const { error } = await sb.rpc('delete_document', { p_id:id });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  if(d && d.file_path){ try{ await sb.storage.from('stikmi-docs').remove([d.file_path]); }catch(e){} }
+  await DB.sync(); toast('Dokumen dihapus','warn'); route();
+}
+function downloadDoc(id){
+  const d=DB.getDoc().find(x=>x.id===id); if(!d) return;
+  downloadStorageFile(d.file_path, d.fileName);
+}
+
+/* =========================================================
+   PORTAL MAHASISWA
+   ========================================================= */
+function viewMahasiswa(){
+  const sess = Session.get();
+  const reg = DB.getReg().find(r=>r.id===sess.regId) || {};
+  const docs = DB.getDoc().filter(d=>d.owner===sess.uid || d.owner===sess.username);
+  const invs = DB.getInv().filter(v=>v.username===sess.username || v.owner===sess.uid);
+  const myKrs = DB.getKRS().filter(k=>k.username===sess.username);
+  const anns = DB.getAnn();
+  const reads = DB.getRead().filter(r=>r.userId===sess.uid || r.username===sess.username).map(r=>r.annId);
+  const unread = anns.filter(a=>!reads.includes(a.id));
+
+  const unpaid = invs.filter(v=>v.status!=='lunas');
+  const totalUnpaid = unpaid.reduce((s,v)=>s+Number(v.jumlah||0),0);
+
+  return `
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><div class="num">${esc(sess.nim||'-')}</div><div class="lbl">NIM</div></div>
+      <div class="stat"><div class="num">${unpaid.length}</div><div class="lbl">Tagihan Aktif</div></div>
+      <div class="stat"><div class="num" style="font-size:1.1rem">${rupiah(totalUnpaid)}</div><div class="lbl">Total Belum Lunas</div></div>
+      <div class="stat"><div class="num">${unread.length}</div><div class="lbl">Pengumuman Baru</div></div>
+      <div class="stat"><div class="num">${docs.length}</div><div class="lbl">Dokumen Saya</div></div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="dash">Dashboard</div>
+      <div class="tab" data-tab="krs">KRS Online</div>
+      <div class="tab" data-tab="tagihan">Tagihan &amp; Pembayaran (${unpaid.length})</div>
+      <div class="tab" data-tab="upload">Upload Dokumen</div>
+      <div class="tab" data-tab="mydocs">Dokumen Saya (${docs.length})</div>
+      <div class="tab" data-tab="profile">Profil</div>
+    </div>
+
+    <div class="tabpane active" id="tp-dash">${mhsDashboard(sess, reg, unpaid, unread, myKrs)}</div>
+    <div class="tabpane" id="tp-krs">${mhsKRSPane(sess, reg, myKrs)}</div>
+    <div class="tabpane" id="tp-tagihan">${mhsTagihanPane(sess, invs)}</div>
+    <div class="tabpane" id="tp-upload">${mhsUploadPane()}</div>
+    <div class="tabpane" id="tp-mydocs">${mhsDocsPane(docs)}</div>
+    <div class="tabpane" id="tp-profile">${mhsProfilePane(reg)}</div>
+  </div>`;
+}
+
+function mhsDashboard(sess, reg, unpaid, unread, myKrs){
+  const st = DB.getSet();
+  const krsPending = myKrs.filter(k=>k.status==='pending').length;
+  const krsApproved = myKrs.filter(k=>k.status==='approved').length;
+  return `
+    <div class="card">
+      <header><h2>Halo, ${esc(sess.nama)} 👋</h2><p>NIM ${esc(sess.nim||'-')} · ${esc(reg.nama_prodi||'-')}${reg.konsentrasi?' · '+esc(reg.konsentrasi.join(', ')):''} · Instrumen ${esc(reg.instrumen_mayor||'-')}</p></header>
+      <div class="body">
+        <div class="form-grid">
+          <div><h4>Tagihan</h4><p class="muted">${unpaid.length? 'Ada <b>'+unpaid.length+' tagihan</b> belum lunas. Buka tab "Tagihan &amp; Pembayaran" untuk konfirmasi bayar.' : 'Semua tagihan lunas. 🎉'}</p></div>
+          <div><h4>KRS</h4><p class="muted">${krsApproved?'KRS disetujui: '+krsApproved+' semester. ':''}${krsPending?'<b>'+krsPending+' KRS menunggu persetujuan admin.</b>':'Belum ada KRS menunggu persetujuan.'}</p></div>
+          <div><h4>Pembayaran</h4><p class="muted">Transfer ke <b>${esc(st.bank_nama)}</b> ${esc(st.bank_rekening)} a.n. ${esc(st.bank_atas_nama)}. Setelah transfer, klik "Saya Sudah Bayar" pada tagihan dan unggah bukti.</p></div>
+          <div><h4>Dokumen</h4><p class="muted">Unggah KRS, SKS, KTM, transkrip, dan dokumen lain di tab "Upload Dokumen".</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <header><h2>Pengumuman Kampus</h2><p>${unread.length? unread.length+' belum dibaca' : 'Semua sudah dibaca'}</p></header>
+      <div class="body">
+        ${DB.getAnn().length? DB.getAnn().slice(0,5).map(a=>{
+          const isUnread = unread.some(u=>u.id===a.id);
+          return `<div class="ann-item ${isUnread?'unread':''}">
+            <b>${esc(a.title)}</b> <span class="date">— ${fmtDateTime(a.created_at)}</span>
+            <p style="margin:6px 0 0;white-space:pre-wrap">${esc(a.body)}</p>
+            ${isUnread?`<div class="btn-row"><button class="btn ghost sm" onclick="markAnnRead('${a.id}')">Tandai dibaca</button></div>`:''}
+          </div>`;
+        }).join('') : '<div class="empty">Belum ada pengumuman.</div>'}
+      </div>
+    </div>`;
+}
+async function markAnnRead(annId){
+  const { error } = await sb.rpc('mark_read', { p_ann_id: annId });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync();
+  toast('Ditandai dibaca','ok'); route();
+}
+
+function mhsKRSPane(sess, reg, myKrs){
+  const active = myKrs.find(k=>k.status==='pending'||k.status==='approved');
+  let html = '';
+  if(active){
+    html += `
+    <div class="card">
+      <header><h2>KRS Semester ${esc(active.semester)} — ${krsStatusLabel(active.status)}</h2><p>Tahun Ajaran ${esc(active.tahun_ajaran||'-')} · Diajukan ${fmtDateTime(active.submitted_at)}</p></header>
+      <div class="body">
+        <div class="table-wrap"><table>
+          <thead><tr><th>Kode</th><th>Mata Kuliah</th><th>SKS</th><th>Status</th></tr></thead>
+          <tbody>${active.courses.map(c=>`<tr><td>${esc(c.kode)}</td><td>${esc(c.nama)}</td><td>${c.sks}</td><td>${c.wajib?'Wajib':'Pilihan'}</td></tr>`).join('')}</tbody>
+          <tfoot><tr><th colspan="2">Total</th><th>${active.total_sks} SKS</th><th></th></tr></tfoot>
+        </table></div>
+        <div class="btn-row">
+          ${active.status==='approved'?`<button class="btn" onclick="downloadKRSFile('${active.id}')">⬇ Unduh KRS (siap cetak)</button>`:''}
+          ${active.status==='pending'?'<span class="alert info" style="margin:0">Menunggu persetujuan admin — KRS terkunci sementara.</span>':''}
+        </div>
+      </div>
+    </div>`;
+  } else {
+    const katalog = katalogFor(reg.id_prodi);
+    const semesters = [...new Set(katalog.map(c=>c.smt))].sort((a,b)=>a-b);
+    const rejectedLast = myKrs.find(k=>k.status==='rejected');
+    html += `
+    <div class="card">
+      <header><h2>Ajukan KRS Online</h2><p>Pilih mata kuliah sesuai semester — maksimal ${MAX_SKS} SKS. Mata kuliah wajib otomatis tercentang.</p></header>
+      <div class="body">
+        ${rejectedLast?'<div class="alert bad">KRS terakhir Anda DITOLAK. Silakan ajukan ulang.</div>':''}
+        <form id="formKRS" onsubmit="return false">
+          <div class="form-grid">
+            <div>
+              <label>Semester <span class="req">*</span></label>
+              <select name="semester" id="krsSemester">
+                ${semesters.map(s=>`<option value="${s}">Semester ${s}</option>`).join('')}
+              </select>
+            </div>
+            <div>
+              <label>Tahun Ajaran</label>
+              <input name="tahun_ajaran" value="${new Date().getFullYear()}/${new Date().getFullYear()+1}">
+            </div>
+          </div>
+          <div class="mt" id="krsCourseList"></div>
+          <div class="btn-row" style="justify-content:space-between;align-items:center">
+            <span>Total: <span class="sks-total" id="krsTotal">0</span> SKS (maks ${MAX_SKS})</span>
+            <button class="btn" id="btnSubmitKRS">Ajukan KRS</button>
+          </div>
+        </form>
+      </div>
+    </div>`;
+  }
+  const history = myKrs.filter(k=>k.status!=='pending');
+  if(history.length){
+    html += `<div class="card"><h3>Riwayat KRS</h3><div class="table-wrap"><table>
+      <thead><tr><th>Semester</th><th>T.A.</th><th>SKS</th><th>Status</th><th>Diajukan</th></tr></thead>
+      <tbody>${history.map(k=>`<tr><td>${k.semester}</td><td>${esc(k.tahun_ajaran||'-')}</td><td>${k.total_sks}</td><td>${krsStatusLabel(k.status)}</td><td>${fmtDateTime(k.submitted_at)}</td></tr>`).join('')}</tbody>
+    </table></div></div>`;
+  }
+  return html;
+}
+
+function renderKrsCourses(){
+  const sess = Session.get();
+  const reg = DB.getReg().find(r=>r.id===sess.regId)||{};
+  const katalog = katalogFor(reg.id_prodi);
+  const smt = Number($('#krsSemester').value);
+  const list = katalog.filter(c=>c.smt===smt);
+  const box = $('#krsCourseList');
+  box.innerHTML = list.map(c=>`
+    <label class="krs-course">
+      <input type="checkbox" data-kode="${esc(c.kode)}" data-sks="${c.sks}" ${c.wajib?'checked disabled':''}>
+      <span class="cinfo"><b>${esc(c.kode)} — ${esc(c.nama)}</b> · ${c.sks} SKS ${c.wajib?'<span class="badge pending">WAJIB</span>':'<span class="badge accepted">PILIHAN</span>'}</span>
+    </label>`).join('') || '<div class="empty">Tidak ada mata kuliah untuk semester ini.</div>';
+  box.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    cb.onchange = updateKrsTotal;
+  });
+  updateKrsTotal();
+}
+function updateKrsTotal(){
+  const boxes = $$('#krsCourseList input[type=checkbox]:checked');
+  const total = boxes.reduce((s,b)=>s+Number(b.dataset.sks),0);
+  const t = $('#krsTotal'); if(!t) return;
+  t.textContent = total;
+  const btn = $('#btnSubmitKRS');
+  if(btn) btn.disabled = total===0;
+  t.style.color = total>MAX_SKS ? 'var(--bad)' : 'var(--maroon-dark)';
+}
+async function submitKRS(){
+  const sess = Session.get();
+  const reg = DB.getReg().find(r=>r.id===sess.regId)||{};
+  const smt = Number($('#krsSemester').value);
+  const ta = $('#formKRS').elements['tahun_ajaran'].value.trim();
+  const checked = $$('#krsCourseList input[type=checkbox]:checked');
+  const katalog = katalogFor(reg.id_prodi);
+  const courses = checked.map(b=>{
+    const c = katalog.find(x=>x.kode===b.dataset.kode);
+    return {kode:c.kode, nama:c.nama, sks:c.sks, wajib:!!c.wajib};
+  });
+  const total = courses.reduce((s,c)=>s+c.sks,0);
+  if(!courses.length){ toast('Pilih minimal satu mata kuliah','bad'); return; }
+  if(total>MAX_SKS){ toast('Melebihi maksimal '+MAX_SKS+' SKS','bad'); return; }
+  const krsList = DB.getKRS();
+  if(krsList.some(k=>k.username===sess.username && k.semester===smt && k.status!=='rejected')){
+    toast('Sudah ada KRS aktif untuk semester '+smt,'warn'); return;
+  }
+  const { error } = await sb.rpc('submit_krs', { p_data: { semester:String(smt), tahun_ajaran:ta, courses, total_sks:total } });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync();
+  toast('KRS diajukan, menunggu persetujuan admin','ok');
+  route();
+}
+function downloadKRSFile(krsId){
+  const k = DB.getKRS().find(x=>x.id===krsId); if(!k) return;
+  const rows = k.courses.map((c,i)=>`<tr><td style="text-align:center">${i+1}</td><td>${esc(c.kode)}</td><td>${esc(c.nama)}</td><td style="text-align:center">${c.sks}</td><td style="text-align:center">${c.wajib?'Wajib':'Pilihan'}</td></tr>`).join('');
+  const html = `<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><title>KRS ${esc(k.nim)}</title>
+<style>body{font-family:Arial,sans-serif;color:#2b1d1d;max-width:800px;margin:24px auto;padding:0 16px}
+.head{border-bottom:4px solid #800000;padding-bottom:10px;margin-bottom:16px}.head h1{color:#800000;margin:0;font-size:20px}
+table{width:100%;border-collapse:collapse;font-size:13px}th,td{border:1px solid #999;padding:6px 8px;text-align:left}
+th{background:#800000;color:#fff}tfoot th{background:#f3e3e3;color:#5c0000}
+.kv{font-size:13px;margin-bottom:12px}.kv b{display:inline-block;min-width:140px}</style></head><body>
+<div class="head"><h1>KARTU RENCANA STUDI (KRS)</h1>
+<div style="font-size:13px">Sekolah Tinggi Internasional Konservatori Musik Indonesia (STIKMI)</div></div>
+<div class="kv">
+<div><b>Nama</b> : ${esc(k.nama)}</div><div><b>NIM</b> : ${esc(k.nim||'-')}</div>
+<div><b>Semester</b> : ${esc(k.semester)}</div><div><b>Tahun Ajaran</b> : ${esc(k.tahun_ajaran||'-')}</div>
+<div><b>Status</b> : DISETUJUI</div></div>
+<table><thead><tr><th style="text-align:center">No</th><th>Kode</th><th>Mata Kuliah</th><th style="text-align:center">SKS</th><th style="text-align:center">Jenis</th></tr></thead>
+<tbody>${rows}</tbody>
+<tfoot><tr><th colspan="3">Total SKS</th><th style="text-align:center">${k.total_sks}</th><th></th></tr></tfoot></table>
+<p style="font-size:12px;color:#777;margin-top:24px">Dicetak ${new Date().toLocaleString('id-ID')} — SIAKAD STIKMI</p>
+</body></html>`;
+  triggerDownload(new Blob([html],{type:'text/html'}), 'KRS_'+(k.nim||k.username)+'_Smt'+k.semester+'.html');
+  toast('KRS diunduh (buka lalu cetak dari browser)','ok');
+}
+
+function mhsTagihanPane(sess, invs){
+  const st = DB.getSet();
+  let html = `
+    <div class="card">
+      <h3>Informasi Pembayaran</h3>
+      <div class="pay-box">
+        <div class="kv">
+          <dt>Bank</dt><dd>${esc(st.bank_nama)}</dd>
+          <dt>No. Rekening</dt><dd><b>${esc(st.bank_rekening)}</b></dd>
+          <dt>Atas Nama</dt><dd>${esc(st.bank_atas_nama)}</dd>
+          <dt>Cabang</dt><dd>${esc(st.bank_cabang)}</dd>
+        </div>
+        <p class="help">Setelah transfer, klik <b>"Saya Sudah Bayar"</b> pada tagihan, isi tanggal transfer, dan unggah bukti. Admin akan memverifikasi.</p>
+      </div>
+    </div>`;
+  if(!invs.length) return html + '<div class="card"><div class="empty">Belum ada tagihan. 🎉</div></div>';
+  html += invs.map(v=>`
+    <div class="card">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:flex-start">
+        <div>
+          <h3 style="margin-bottom:2px">${esc(v.jenis)}${v.semester?' — Semester '+esc(v.semester):''}</h3>
+          <div class="muted" style="font-size:.82rem">${esc(v.no_inv)} · T.A. ${esc(v.tahun_ajaran||'-')}${v.jatuh_tempo?' · Jatuh tempo '+fmtDate(v.jatuh_tempo):''}</div>
+          <div class="amount money" style="font-size:1.25rem;margin-top:6px">${rupiah(v.jumlah)}</div>
+        </div>
+        <div>${invoiceStatusLabel(v.status)}</div>
+      </div>
+      ${v.status!=='lunas'?`
+        <div class="btn-row">
+          <button class="btn" onclick="openClaimInvoice('${v.id}')">💳 Saya Sudah Bayar</button>
+          ${v.bukti?`<button class="btn ghost sm" onclick="downloadBuktiInv('${v.id}')">Unduh Bukti Saya</button>`:''}
+        </div>
+        ${v.status==='claimed'?'<div class="alert info" style="margin-bottom:0">Menunggu verifikasi admin.</div>':''}
+      `:`
+        ${v.bukti?`<div class="btn-row"><button class="btn ghost sm" onclick="downloadBuktiInv('${v.id}')">Unduh Bukti</button></div>`:''}
+        <div class="alert ok" style="margin-bottom:0">Lunas${v.verified_at?' — diverifikasi '+fmtDateTime(v.verified_at):''}.</div>
+      `}
+    </div>`).join('');
+  return html;
+}
+function openClaimInvoice(id){
+  const v = DB.getInv().find(x=>x.id===id); if(!v) return;
+  if(v.status==='lunas'){ toast('Tagihan sudah lunas','ok'); return; }
+  openModal('Konfirmasi Pembayaran — '+esc(v.jenis), `
+    <div class="pay-box mb">
+      <div class="amount">${rupiah(v.jumlah)}</div>
+      <div class="muted" style="font-size:.85rem">${esc(v.no_inv)}${v.semester?' · Semester '+esc(v.semester):''}</div>
+    </div>
+    <form id="formClaim" onsubmit="return false">
+      <label>Tanggal Transfer <span class="req">*</span></label>
+      <input type="date" name="tgl_bayar" required>
+      <div class="help mb">Nama Anda: <b>${esc(v.nama)}</b> — pastikan transfer sesuai nama ini.</div>
+      <label>Bukti Transfer (JPG/PNG/PDF) <span class="req">*</span></label>
+      <input type="file" name="bukti" accept="application/pdf,image/png,image/jpeg" required>
+      <div class="help">Maks 3 MB. Admin akan memverifikasi bukti ini.</div>
+    </form>`,
+    `<button class="btn ghost" onclick="closeModal()">Batal</button>
+     <button class="btn" onclick="saveClaimInvoice('${v.id}')">Kirim Konfirmasi</button>`);
+}
+async function saveClaimInvoice(id){
+  const f=$('#formClaim'); if(!f) return;
+  if(!f.checkValidity()){ f.reportValidity(); return; }
+  const fd=new FormData(f);
+  const file = fd.get('bukti');
+  if(!file || !file.size){ toast('Pilih file bukti','bad'); return; }
+  if(file.size > 5*1024*1024){ toast('Ukuran melebihi 5 MB','bad'); return; }
+  const path = `invoices/${id}/${Date.now()}-${file.name}`;
+  const { error:upErr } = await sb.storage.from('stikmi-docs')
+    .upload(path, file, { contentType:file.type||'application/octet-stream', upsert:false });
+  if(upErr){ toast('Gagal unggah bukti: '+upErr.message,'bad'); return; }
+  const bukti = { name:file.name, size:file.size, type:file.type, path };
+  const { error } = await sb.rpc('update_invoice', { p_id:id, p_patch:{
+    status:'claimed', tgl_bayar: fd.get('tgl_bayar'), bukti } });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  await DB.sync();
+  closeModal();
+  toast('Konfirmasi pembayaran terkirim. Menunggu verifikasi admin.','ok');
+  route();
+}
+
+function mhsUploadPane(){
+  return `
+    <div class="card">
+      <h3>Unggah Dokumen Akademik</h3>
+      <p class="muted mb">Unggah KRS, SKS, KTM, transkrip, atau dokumen lain. Format JPG/PNG/PDF, maks. 3 MB.</p>
+      <form id="formUpload" onsubmit="return false">
+        <div class="form-grid">
+          <div>
+            <label>Jenis Dokumen <span class="req">*</span></label>
+            <select name="type" required>
+              ${DOC_TYPES.map(t=>`<option value="${t}">${docTypeLabel(t)}</option>`).join('')}
+            </select>
+          </div>
+          <div>
+            <label>Semester</label>
+            <select name="semester">
+              ${[1,2,3,4,5,6,7,8].map(s=>`<option value="${s}">Semester ${s}</option>`).join('')}
+              <option value="">Tidak per semester</option>
+            </select>
+          </div>
+          <div class="full">
+            <label>Keterangan (opsional)</label>
+            <input name="keterangan" placeholder="contoh: KRS Semester 3 TA 2025/2026">
+          </div>
+          <div class="full">
+            <label>File <span class="req">*</span></label>
+            <input type="file" name="file" id="fileInput" required accept="application/pdf,image/png,image/jpeg">
+            <div class="help" id="fileInfo"></div>
+          </div>
+          <div class="full btn-row">
+            <button class="btn" id="btnUpload">Unggah</button>
+          </div>
+        </div>
+      </form>
+      <div id="uploadMsg"></div>
+    </div>`;
+}
+function mhsDocsPane(docs){
+  if(!docs.length) return '<div class="card"><div class="empty">Belum ada dokumen. Unggah dari tab "Upload Dokumen".</div></div>';
+  return `<div class="card"><h3>Dokumen Saya</h3>
+    ${docs.map(d=>`
+      <div class="doc-item">
+        <div class="meta">
+          <b>${docTypeLabel(d.type)}</b>
+          ${d.semester?` <span class="file-pill">Semester ${esc(d.semester)}</span>`:''}
+          <br>${esc(d.fileName)} — ${(d.size/1024).toFixed(0)} KB ${d.keterangan? '&middot; '+esc(d.keterangan):''}
+          <br><span class="muted">${fmtDateTime(d.uploaded)}</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn ghost sm" onclick="downloadDoc('${d.id}')">Unduh</button>
+          <button class="btn bad sm" onclick="delMyDoc('${d.id}')">Hapus</button>
+        </div>
+      </div>`).join('')}</div>`;
+}
+function mhsProfilePane(reg){
+  const kv=(k,v)=>`<dt>${k}</dt><dd>${v??'-'}</dd>`;
+  return `
+  <div class="card">
+    <h3>Profil Mahasiswa</h3>
+    <div class="kv">
+      ${kv('NIM','<b>'+(esc(reg.nim)||'-')+'</b>')}
+      ${kv('Nama Lengkap',esc(reg.nama_lengkap))}
+      ${kv('Prodi',esc(reg.nama_prodi))}
+      ${kv('Peminatan Program',esc(reg.peminatan_program))}
+      ${kv('Konsentrasi',(reg.konsentrasi||[]).join(', '))}
+      ${kv('Instrumen Mayor',esc(reg.instrumen_mayor))}
+      ${kv('Jalur Masuk',esc(reg.jalur_masuk_label))}
+      ${kv('Kelas',esc(reg.kelas))}
+      ${kv('Tanggal Masuk',fmtDate(reg.tgl_masuk_kuliah))}
+      ${kv('NIK',esc(reg.nik))}
+      ${kv('Tempat, Tgl Lahir',(esc(reg.tempat_lahir)||'-')+', '+fmtDate(reg.tanggal_lahir))}
+      ${kv('Jenis Kelamin',reg.jenis_kelamin==='L'?'Laki-laki':'Perempuan')}
+      ${kv('Email',esc(reg.email))}
+      ${kv('HP',esc(reg.hp))}
+      ${kv('Alamat',(esc(reg.jalan)||'-')+', '+(esc(reg.kab_kota)||'-')+', '+(esc(reg.provinsi)||'-'))}
+      ${kv('Nama Orang Tua/Wali',esc(reg.nama_ortu))}
+    </div>
+    <hr>
+    <h3>Akun</h3>
+    <div class="btn-row">
+      <button class="btn ghost" onclick="changeMyPass()">Ganti Password</button>
+    </div>
+  </div>`;
+}
+
+function bindMahasiswa(){
+  $$('.tab').forEach(t=>{
+    t.onclick=()=>{
+      $$('.tab').forEach(x=>x.classList.remove('active'));
+      $$('.tabpane').forEach(x=>x.classList.remove('active'));
+      t.classList.add('active');
+      $('#tp-'+t.dataset.tab).classList.add('active');
+    };
+  });
+  // upload dokumen
+  const fileInput = $('#fileInput');
+  if(fileInput){
+    fileInput.onchange=()=>{
+      const f=fileInput.files[0];
+      if(f) $('#fileInfo').textContent = `${f.name} — ${(f.size/1024).toFixed(0)} KB`;
+    };
+  }
+  const btnUpload = $('#btnUpload');
+  if(btnUpload){
+    btnUpload.onclick = async ()=>{
+      const form=$('#formUpload'); const fd=new FormData(form);
+      const f = fd.get('file');
+      if(!f || !f.size){ $('#uploadMsg').innerHTML='<div class="alert bad">Pilih file terlebih dahulu.</div>'; return; }
+      if(f.size > 5*1024*1024){ $('#uploadMsg').innerHTML='<div class="alert bad">Ukuran file melebihi 5 MB.</div>'; return; }
+      btnUpload.disabled=true; btnUpload.textContent='Mengunggah...';
+      try{
+        const { data:uData } = await sb.auth.getUser();
+        const uid_ = uData?.user?.id || 'anon';
+        const path = `docs/${uid_}/${Date.now()}-${f.name}`;
+        const { error:upErr } = await sb.storage.from('stikmi-docs')
+          .upload(path, f, { contentType:f.type||'application/octet-stream', upsert:false });
+        if(upErr){ throw new Error('Gagal unggah: '+upErr.message); }
+        const meta = { type: fd.get('type'), semester: fd.get('semester'),
+          keterangan: fd.get('keterangan'), file_path:path, file_name:f.name,
+          size: String(f.size), mime: f.type };
+        const { error:rErr } = await sb.rpc('add_document', { p_meta: meta });
+        if(rErr){ throw new Error(rErr.message); }
+        await DB.sync();
+        $('#uploadMsg').innerHTML='<div class="alert ok">Dokumen terunggah.</div>';
+        form.reset(); $('#fileInfo').textContent='';
+        btnUpload.disabled=false; btnUpload.textContent='Unggah';
+        toast('Dokumen terunggah','ok');
+        route();
+      }catch(err){
+        $('#uploadMsg').innerHTML='<div class="alert bad">Gagal: '+esc(err.message)+'</div>';
+        btnUpload.disabled=false; btnUpload.textContent='Unggah';
+      }
+    };
+  }
+  // KRS
+  const krsSemester = $('#krsSemester');
+  if(krsSemester){
+    renderKrsCourses();
+    krsSemester.onchange = renderKrsCourses;
+    $('#btnSubmitKRS').onclick = submitKRS;
+  }
+}
+async function delMyDoc(id){
+  if(!confirm('Hapus dokumen ini? File di storage juga dihapus.')) return;
+  const d = DB.getDoc().find(x=>x.id===id);
+  const { error } = await sb.rpc('delete_document', { p_id:id });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  if(d && d.file_path){ try{ await sb.storage.from('stikmi-docs').remove([d.file_path]); }catch(e){} }
+  await DB.sync(); toast('Dokumen dihapus','warn'); route();
+}
+async function changeMyPass(){
+  const np = prompt('Password baru (min 6):'); if(!np || np.length<6){ toast('Password baru tidak valid (min 6 karakter)','warn'); return; }
+  const { error } = await sb.auth.updateUser({ password: np });
+  if(error){ toast('Gagal: '+error.message,'bad'); return; }
+  toast('Password diperbarui','ok');
+}
+</script>
+</body>
+</html>
